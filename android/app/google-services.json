@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "554125480057",
+    "project_id": "conbun829",
+    "storage_bucket": "conbun829.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:554125480057:android:925634c8a623d5895544a8",
+        "android_client_info": {
+          "package_name": "com.conbun"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB-KJy1B1-hprxA5ccnHWm9H5Fvc3IDgMQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:554125480057:android:c023b5c8ea329ae35544a8",
+        "android_client_info": {
+          "package_name": "com.conbun.user"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB-KJy1B1-hprxA5ccnHWm9H5Fvc3IDgMQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

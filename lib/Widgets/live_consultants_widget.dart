@@ -4,7 +4,6 @@ import 'package:conbun_production/Models/live_consultant_model.dart';
 import 'package:conbun_production/Widgets/live_filter_bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../Agora/controllers/individual_chat_controller.dart';
 import '../utils/colors.dart';
 
 class LiveConsultantWidget extends StatefulWidget {

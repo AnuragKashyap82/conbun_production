@@ -22,7 +22,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:shimmer_effect/shimmer_effect.dart';
-import '../../../Agora/controllers/individual_chat_controller.dart';
 import '../../../Controllers/notification_controller.dart';
 import '../../../NotificationServices/notification_services.dart';
 import '../../../Widgets/appointment_widget.dart';

@@ -1,4 +1,3 @@
-import 'package:conbun_production/Agora/controllers/individual_chat_controller.dart';
 import 'package:conbun_production/Controllers/consultants_details_controller.dart';
 import 'package:conbun_production/Controllers/package_controller.dart';
 import 'package:conbun_production/Controllers/package_duration_controller.dart';

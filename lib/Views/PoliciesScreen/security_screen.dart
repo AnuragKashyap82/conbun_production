@@ -1,35 +1,44 @@
 import 'package:flutter/material.dart';
 
-import '../utils/colors.dart';
+import '../../utils/colors.dart';
 
-class CancellationRefundScreen extends StatelessWidget {
-  const CancellationRefundScreen({super.key});
+
+class SecurityScreen extends StatelessWidget {
+  const SecurityScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: colorBackground,
-      appBar: AppBar(
-        backgroundColor: colorWhite,
-        elevation: 7,
-        shadowColor: Colors.black.withOpacity(0.1),
-        automaticallyImplyLeading: false,
-        leading: GestureDetector(
-            onTap: () {
-              Navigator.pop(context);
-            },
-            child: Icon(
-              Icons.arrow_back,
-              color: colorViolet,
-              size: 18,
-            )),
-        title: Text(
-          "Cancellation & Refund",
-          style: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.w600,
-              color: colorViolet,
-              fontFamily: "SemiBold"),
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(kToolbarHeight),
+        child: GestureDetector(
+          onTap: () {
+            Navigator.pop(context);
+          },
+          child: AppBar(
+            backgroundColor: colorWhite,
+            elevation: 7,
+            shadowColor: Colors.black.withOpacity(0.1),
+            automaticallyImplyLeading: false,
+            leading: GestureDetector(
+                onTap: () {
+                  Navigator.pop(context);
+                },
+                child: Icon(
+                  Icons.arrow_back,
+                  color: colorViolet,
+                  size: 20,
+                )),
+            title: Text(
+              "Security",
+              style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w600,
+                  color: colorViolet,
+                  fontFamily: "SemiBold"),
+            ),
+          ),
         ),
       ),
       body: SingleChildScrollView(

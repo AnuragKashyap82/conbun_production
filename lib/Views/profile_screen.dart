@@ -4,15 +4,13 @@ import 'package:conbun_production/Controllers/follower_controller.dart';
 import 'package:conbun_production/Controllers/transaction_account_controller.dart';
 import 'package:conbun_production/Controllers/transaction_recharge_controller.dart';
 import 'package:conbun_production/Controllers/user_controller.dart';
-import 'package:conbun_production/Views/cancellation_refund_screen.dart';
+import 'package:conbun_production/Views/PoliciesScreen/cancellation_refund_screen.dart';
 import 'package:conbun_production/Views/editProfileScreen/edit_profile_apis.dart';
 import 'package:conbun_production/Views/editProfileScreen/edit_profile_screen.dart';
 import 'package:conbun_production/Views/help_center/help_center.dart';
 import 'package:conbun_production/Views/loginScreen/login_screen.dart';
-import 'package:conbun_production/Views/privacy_policy_screen.dart';
-import 'package:conbun_production/Views/term_condition_screen.dart';
+import 'package:conbun_production/Views/PoliciesScreen/term_condition_screen.dart';
 import 'package:conbun_production/utils/colors.dart';
-import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -20,8 +18,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shimmer_effect/shimmer_effect.dart';
 import 'package:url_launcher/url_launcher.dart';
-
-import 'balance_screen.dart';
+import 'PoliciesScreen/privacy_policy_screen.dart';
 import 'bottomNavScreens/bottomNavScreen.dart';
 
 class ProfileScreen extends StatefulWidget {

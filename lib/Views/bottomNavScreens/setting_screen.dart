@@ -1,12 +1,9 @@
 import 'dart:typed_data';
 import 'package:conbun_production/Views/addFeedbackScreen/add_feedback_screen.dart';
-import 'package:conbun_production/Views/balance_screen.dart';
 import 'package:conbun_production/Views/editProfileScreen/edit_profile_screen.dart';
 import 'package:conbun_production/Views/followers_screen.dart';
 import 'package:conbun_production/Views/help_center/help_center.dart';
-import 'package:conbun_production/Views/privacy_policy_screen.dart';
 import 'package:conbun_production/Views/profile_screen.dart';
-import 'package:conbun_production/Views/security_screen.dart';
 import 'package:conbun_production/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -14,8 +11,8 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:shimmer_effect/shimmer_effect.dart';
 import '../../Controllers/user_controller.dart';
+import '../PoliciesScreen/privacy_policy_screen.dart';
 import '../editProfileScreen/edit_profile_apis.dart';
-import '../transactionHistoryScreen/transaction_history_screen.dart';
 import 'bottomNavScreen.dart';
 
 class SettingScreen extends StatefulWidget {

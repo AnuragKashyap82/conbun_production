@@ -191,53 +191,51 @@ class _SearchConsultantsScreenState extends State<SearchConsultantsScreen> {
               return Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16.0),
                 child: SingleChildScrollView(
-                  child: Expanded(
-                    child: Column(
-                      children: [
-                        ShimmerEffect(
-                            baseColor: Colors.grey.shade300,
-                            highlightColor: Colors.grey.shade100,
-                            child: Container(
-                              width: MediaQuery.of(context).size.width,
-                              decoration: BoxDecoration(
-                                  color:
-                                  Colors.green,
-                                  borderRadius: BorderRadius.circular(10)),
-                              height: 100,
-                            )),
-                        SizedBox(
-                          height: 16,
-                        ),
-                        ShimmerEffect(
-                            baseColor: Colors.grey.shade300,
-                            highlightColor: Colors.grey.shade100,
-                            child: Container(
-                              width: MediaQuery.of(context).size.width,
-                              decoration: BoxDecoration(
-                                  color:
-                                  Colors.green,
-                                  borderRadius: BorderRadius.circular(10)),
-                              height: 100,
-                            )),
-                        SizedBox(
-                          height: 16,
-                        ),
-                        ShimmerEffect(
-                            baseColor: Colors.grey.shade300,
-                            highlightColor: Colors.grey.shade100,
-                            child: Container(
-                              width: MediaQuery.of(context).size.width,
-                              decoration: BoxDecoration(
-                                  color:
-                                  Colors.green,
-                                  borderRadius: BorderRadius.circular(10)),
-                              height: 100,
-                            )),
-                        SizedBox(
-                          height: 16,
-                        ),
-                      ],
-                    ),
+                  child: Column(
+                    children: [
+                      ShimmerEffect(
+                          baseColor: Colors.grey.shade300,
+                          highlightColor: Colors.grey.shade100,
+                          child: Container(
+                            width: MediaQuery.of(context).size.width,
+                            decoration: BoxDecoration(
+                                color:
+                                Colors.green,
+                                borderRadius: BorderRadius.circular(10)),
+                            height: 100,
+                          )),
+                      SizedBox(
+                        height: 16,
+                      ),
+                      ShimmerEffect(
+                          baseColor: Colors.grey.shade300,
+                          highlightColor: Colors.grey.shade100,
+                          child: Container(
+                            width: MediaQuery.of(context).size.width,
+                            decoration: BoxDecoration(
+                                color:
+                                Colors.green,
+                                borderRadius: BorderRadius.circular(10)),
+                            height: 100,
+                          )),
+                      SizedBox(
+                        height: 16,
+                      ),
+                      ShimmerEffect(
+                          baseColor: Colors.grey.shade300,
+                          highlightColor: Colors.grey.shade100,
+                          child: Container(
+                            width: MediaQuery.of(context).size.width,
+                            decoration: BoxDecoration(
+                                color:
+                                Colors.green,
+                                borderRadius: BorderRadius.circular(10)),
+                            height: 100,
+                          )),
+                      SizedBox(
+                        height: 16,
+                      ),
+                    ],
                   ),
                 ),
               );

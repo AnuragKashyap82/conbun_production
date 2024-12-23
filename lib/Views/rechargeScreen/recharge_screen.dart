@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
+import 'package:razorpay_flutter/razorpay_flutter.dart';
 
 import '../../Controllers/transaction_recharge_controller.dart';
 import '../../utils/colors.dart';
@@ -23,238 +24,238 @@ class RechargeScreen extends StatefulWidget {
 
 class _RechargeScreenState extends State<RechargeScreen> {
   RechargeApis rechargeApis = Get.put(RechargeApis());
-  // late Razorpay _razorpay;
+  late Razorpay _razorpay;
   UserController userController = Get.find();
   TextEditingController _amountController = TextEditingController();
   TransactionRechargeController transactionRechargeController = Get.find();
   CouponController couponController = Get.put(CouponController());
 
-  // ///Razorpay Payment
-  // void openCheckout(amount) async {
-  //   amount = amount * 100;
-  //   var options = {
-  //     'key': Constant.razorpayKeyId,
-  //     'amount': amount,
-  //     'name': 'Consultants',
-  //     'currency': 'INR',
-  //     'retry': {'enabled': false, 'max_count': 1},
-  //     'description': 'Consultants Wallet Recharge',
-  //     'prefill': {'phone': userController.userData().phoneNumber, 'email': "${userController.userData().email}"},
-  //     'external': {
-  //       'wallets': ['paytm']
-  //     }
-  //   };
-  //
-  //   try {
-  //     _razorpay.open(options);
-  //   } catch (e) {
-  //     print('Error: $e');
-  //   }
-  // }
-  //
-  // void _handlePaymentSuccess(PaymentSuccessResponse response) async {
-  //   // Handle payment success
-  //   setState(() {
-  //     _isLoading = false;
-  //   });
-  //   print("Status: Payment Failed ${response.paymentId}");
-  //   showSnackBar("Status: Success, PaymentId: ${response.paymentId}", context);
-  //
-  //   // showSnackBar(rechargeApis.couponAmount.value, context);
-  //   // showSnackBar(rechargeApis.couponId.value, context);
-  //   // showSnackBar(rechargeApis.netAmount.value, context);
-  //
-  //   final responseMessage = await rechargeApis.rechargeUserWallet(
-  //     userController.userData().id,
-  //     rechargeApis.couponId.value,
-  //     rechargeApis.couponAmount.value,
-  //     _amountController.text.trim(),
-  //     rechargeApis.netAmount.value == ''?_amountController.text.trim():rechargeApis.netAmount.value,
-  //     response.paymentId.toString(),
-  //     '',
-  //     '',
-  //     'Success',
-  //   );
-  //   showDialog(
-  //       context: context,
-  //       builder: (context) {
-  //         return AlertDialog(
-  //           backgroundColor: colorWhite,
-  //           surfaceTintColor: colorWhite,
-  //           alignment: Alignment(0.0, 0.0),
-  //           shape: RoundedRectangleBorder(
-  //             borderRadius: BorderRadius.all(
-  //               Radius.circular(
-  //                 20.0,
-  //               ),
-  //             ),
-  //           ),
-  //           contentPadding: EdgeInsets.only(
-  //             top: 10.0,
-  //           ),
-  //           insetPadding:
-  //           EdgeInsets.symmetric(horizontal: 36),
-  //           content: Container(
-  //             height: 420,
-  //             child: Column(
-  //               crossAxisAlignment:
-  //               CrossAxisAlignment.center,
-  //               mainAxisAlignment: MainAxisAlignment.center,
-  //               children: <Widget>[
-  //                 Lottie.asset(
-  //                   'assets/lottie/done.json',
-  //                   width: 200,
-  //                   height: 200,
-  //                   fit: BoxFit.fill,
-  //                 ),
-  //                 SizedBox(
-  //                   height: 16,
-  //                   width:
-  //                   MediaQuery.of(context).size.width,
-  //                 ),
-  //                 Text(
-  //                   "Wallet Recharged\nSuccessfully",
-  //                   style: TextStyle(
-  //                       fontSize: 21,
-  //                       fontWeight: FontWeight.w800,
-  //                       color: Color(0xff677294),
-  //                       fontFamily: "Bold"),
-  //                   textAlign: TextAlign.center,
-  //                 ),
-  //                 Text(
-  //                   "dsvfdbvdfkn kfcn kvg\ndfkbofdbofjbogf",
-  //                   style: TextStyle(
-  //                       fontSize: 12,
-  //                       fontWeight: FontWeight.w500,
-  //                       color: Color(0xff9C9C9C),
-  //                       fontFamily: "SemiBold"),
-  //                   textAlign: TextAlign.center,
-  //                 ),
-  //                 SizedBox(
-  //                   height: 26,
-  //                 ),
-  //                 GestureDetector(
-  //                   onTap: () {
-  //                     Navigator.pop(context);
-  //                     if(widget.code == 'booking'){
-  //                       Navigator.pop(context);
-  //                     }else{
-  //                      Navigator.pushReplacement(context, MaterialPageRoute(builder: (_)=> TransactionHistoryScreen()));
-  //                     }
-  //                   },
-  //                   child: Container(
-  //                     height: 40,
-  //                     width: MediaQuery.of(context)
-  //                         .size
-  //                         .width *
-  //                         0.5,
-  //                     decoration: BoxDecoration(
-  //                         color: colorBlack,
-  //                         borderRadius:
-  //                         BorderRadius.circular(100)),
-  //                     child: Center(
-  //                       child: Text(
-  //                         "Done",
-  //                         style: TextStyle(
-  //                             fontSize: 15,
-  //                             fontWeight: FontWeight.w600,
-  //                             color: colorWhite,
-  //                             fontFamily: "SemiBold"),
-  //                       ),
-  //                     ),
-  //                   ),
-  //                 ),
-  //               ],
-  //             ),
-  //           ),
-  //         );
-  //       });
-  //   await userController.fetchUserWalletBalance();
-  //   await transactionRechargeController.fetchAllTransactionRecharge();
-  //   await transactionRechargeController.fetchSuccessTransactionRecharge();
-  //   await transactionRechargeController.fetchPendingTransactionRecharge();
-  //   await transactionRechargeController.fetchFailedTransactionRecharge();
-  //   await transactionRechargeController.fetchInitiateTransactionRecharge();
-  //   await transactionRechargeController.fetchCancelledTransactionRecharge();
-  // }
-  //
-  // void _handlePaymentError(PaymentFailureResponse response) async {
-  //   // Handle payment error
-  //   setState(() {
-  //     _isLoading = false;
-  //   });
-  //   print("Status: Payment Failed ${response.message}");
-  //   showSnackBar('Status: Payment Failed ${response.message} ', context);
-  //
-  //   showSnackBar(rechargeApis.couponAmount.value, context);
-  //   showSnackBar(rechargeApis.couponId.value, context);
-  //   showSnackBar(rechargeApis.netAmount.value, context);
-  //
-  //   final responseMessage = await rechargeApis.rechargeUserWallet(
-  //     userController.userData().id,
-  //     rechargeApis.couponId.value,
-  //     rechargeApis.couponAmount.value,
-  //     _amountController.text.trim(),
-  //     rechargeApis.netAmount.value == ''?_amountController.text.trim():rechargeApis.netAmount.value,
-  //     '',
-  //     '',
-  //     '',
-  //     'Failed',
-  //   );
-  //
-  //   showSnackBar(responseMessage['message'], context);
-  //   await userController.fetchUserWalletBalance();
-  //   await transactionRechargeController.fetchAllTransactionRecharge();
-  //   await transactionRechargeController.fetchSuccessTransactionRecharge();
-  //   await transactionRechargeController.fetchPendingTransactionRecharge();
-  //   await transactionRechargeController.fetchFailedTransactionRecharge();
-  //   await transactionRechargeController.fetchInitiateTransactionRecharge();
-  //   await transactionRechargeController.fetchCancelledTransactionRecharge();
-  // }
-  //
-  // void _handleExternalWallet(ExternalWalletResponse response) async {
-  //   // Handle external wallet response
-  //   setState(() {
-  //     _isLoading = false;
-  //   });
-  //   print("Status: Payment Failed ${response.walletName}");
-  //   showSnackBar('Status: Payment Failed ${response.walletName} ', context);
-  //
-  //   showSnackBar(rechargeApis.couponAmount.value, context);
-  //   showSnackBar(rechargeApis.couponId.value, context);
-  //   showSnackBar(rechargeApis.netAmount.value, context);
-  //
-  //   final responseMessage = await rechargeApis.rechargeUserWallet(
-  //     userController.userData().id,
-  //     rechargeApis.couponId.value,
-  //     rechargeApis.couponAmount.value,
-  //     _amountController.text.trim(),
-  //     rechargeApis.netAmount.value == ''?_amountController.text.trim():rechargeApis.netAmount.value,
-  //     '',
-  //     '',
-  //     '',
-  //     'Failed',
-  //   );
-  //   showSnackBar(responseMessage['message'], context);
-  //   await userController.fetchUserWalletBalance();
-  //   await transactionRechargeController.fetchAllTransactionRecharge();
-  //   await transactionRechargeController.fetchSuccessTransactionRecharge();
-  //   await transactionRechargeController.fetchPendingTransactionRecharge();
-  //   await transactionRechargeController.fetchFailedTransactionRecharge();
-  //   await transactionRechargeController.fetchInitiateTransactionRecharge();
-  //   await transactionRechargeController.fetchCancelledTransactionRecharge();
-  // }
-  //
-  // @override
-  // void initState() {
-  //   // TODO: implement initState
-  //   super.initState();
-  //   _razorpay = Razorpay();
-  //   _razorpay.on(Razorpay.EVENT_PAYMENT_SUCCESS, _handlePaymentSuccess);
-  //   _razorpay.on(Razorpay.EVENT_PAYMENT_ERROR, _handlePaymentError);
-  //   _razorpay.on(Razorpay.EVENT_EXTERNAL_WALLET, _handleExternalWallet);
-  //   rechargeApis.clearCoupon();
-  // }
+  ///Razorpay Payment
+  void openCheckout(amount) async {
+    amount = amount * 100;
+    var options = {
+      'key': Constant.razorpayKeyId,
+      'amount': amount,
+      'name': 'Consultants',
+      'currency': 'INR',
+      'retry': {'enabled': false, 'max_count': 1},
+      'description': 'Conbun Wallet Recharge',
+      'prefill': {'phone': userController.userData().phoneNumber, 'email': "${userController.userData().email}"},
+      'external': {
+        'wallets': ['paytm']
+      }
+    };
+
+    try {
+      _razorpay.open(options);
+    } catch (e) {
+      print('Error: $e');
+    }
+  }
+
+  void _handlePaymentSuccess(PaymentSuccessResponse response) async {
+    // Handle payment success
+    setState(() {
+      _isLoading = false;
+    });
+    print("Status: Payment Failed ${response.paymentId}");
+    showSnackBar("Status: Success, PaymentId: ${response.paymentId}", context);
+
+    // showSnackBar(rechargeApis.couponAmount.value, context);
+    // showSnackBar(rechargeApis.couponId.value, context);
+    // showSnackBar(rechargeApis.netAmount.value, context);
+
+    final responseMessage = await rechargeApis.rechargeUserWallet(
+      userController.userData().id,
+      rechargeApis.couponId.value,
+      rechargeApis.couponAmount.value,
+      _amountController.text.trim(),
+      rechargeApis.netAmount.value == ''?_amountController.text.trim():rechargeApis.netAmount.value,
+      response.paymentId.toString(),
+      '',
+      '',
+      'Success',
+    );
+    showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            backgroundColor: colorWhite,
+            surfaceTintColor: colorWhite,
+            alignment: Alignment(0.0, 0.0),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(
+                Radius.circular(
+                  20.0,
+                ),
+              ),
+            ),
+            contentPadding: EdgeInsets.only(
+              top: 10.0,
+            ),
+            insetPadding:
+            EdgeInsets.symmetric(horizontal: 36),
+            content: Container(
+              height: 420,
+              child: Column(
+                crossAxisAlignment:
+                CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Lottie.asset(
+                    'assets/lottie/done.json',
+                    width: 200,
+                    height: 200,
+                    fit: BoxFit.fill,
+                  ),
+                  SizedBox(
+                    height: 16,
+                    width:
+                    MediaQuery.of(context).size.width,
+                  ),
+                  Text(
+                    "Wallet Recharged\nSuccessfully",
+                    style: TextStyle(
+                        fontSize: 21,
+                        fontWeight: FontWeight.w800,
+                        color: Color(0xff677294),
+                        fontFamily: "Bold"),
+                    textAlign: TextAlign.center,
+                  ),
+                  Text(
+                    "dsvfdbvdfkn kfcn kvg\ndfkbofdbofjbogf",
+                    style: TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.w500,
+                        color: Color(0xff9C9C9C),
+                        fontFamily: "SemiBold"),
+                    textAlign: TextAlign.center,
+                  ),
+                  SizedBox(
+                    height: 26,
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.pop(context);
+                      if(widget.code == 'booking'){
+                        Navigator.pop(context);
+                      }else{
+                       Navigator.pushReplacement(context, MaterialPageRoute(builder: (_)=> TransactionHistoryScreen()));
+                      }
+                    },
+                    child: Container(
+                      height: 40,
+                      width: MediaQuery.of(context)
+                          .size
+                          .width *
+                          0.5,
+                      decoration: BoxDecoration(
+                          color: colorBlack,
+                          borderRadius:
+                          BorderRadius.circular(100)),
+                      child: Center(
+                        child: Text(
+                          "Done",
+                          style: TextStyle(
+                              fontSize: 15,
+                              fontWeight: FontWeight.w600,
+                              color: colorWhite,
+                              fontFamily: "SemiBold"),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          );
+        });
+    await userController.fetchUserWalletBalance();
+    await transactionRechargeController.fetchAllTransactionRecharge();
+    await transactionRechargeController.fetchSuccessTransactionRecharge();
+    await transactionRechargeController.fetchPendingTransactionRecharge();
+    await transactionRechargeController.fetchFailedTransactionRecharge();
+    await transactionRechargeController.fetchInitiateTransactionRecharge();
+    await transactionRechargeController.fetchCancelledTransactionRecharge();
+  }
+
+  void _handlePaymentError(PaymentFailureResponse response) async {
+    // Handle payment error
+    setState(() {
+      _isLoading = false;
+    });
+    print("Status: Payment Failed ${response.message}");
+    showSnackBar('Status: Payment Failed ${response.message} ', context);
+
+    showSnackBar(rechargeApis.couponAmount.value, context);
+    showSnackBar(rechargeApis.couponId.value, context);
+    showSnackBar(rechargeApis.netAmount.value, context);
+
+    final responseMessage = await rechargeApis.rechargeUserWallet(
+      userController.userData().id,
+      rechargeApis.couponId.value,
+      rechargeApis.couponAmount.value,
+      _amountController.text.trim(),
+      rechargeApis.netAmount.value == ''?_amountController.text.trim():rechargeApis.netAmount.value,
+      '',
+      '',
+      '',
+      'Failed',
+    );
+
+    showSnackBar(responseMessage['message'], context);
+    await userController.fetchUserWalletBalance();
+    await transactionRechargeController.fetchAllTransactionRecharge();
+    await transactionRechargeController.fetchSuccessTransactionRecharge();
+    await transactionRechargeController.fetchPendingTransactionRecharge();
+    await transactionRechargeController.fetchFailedTransactionRecharge();
+    await transactionRechargeController.fetchInitiateTransactionRecharge();
+    await transactionRechargeController.fetchCancelledTransactionRecharge();
+  }
+
+  void _handleExternalWallet(ExternalWalletResponse response) async {
+    // Handle external wallet response
+    setState(() {
+      _isLoading = false;
+    });
+    print("Status: Payment Failed ${response.walletName}");
+    showSnackBar('Status: Payment Failed ${response.walletName} ', context);
+
+    showSnackBar(rechargeApis.couponAmount.value, context);
+    showSnackBar(rechargeApis.couponId.value, context);
+    showSnackBar(rechargeApis.netAmount.value, context);
+
+    final responseMessage = await rechargeApis.rechargeUserWallet(
+      userController.userData().id,
+      rechargeApis.couponId.value,
+      rechargeApis.couponAmount.value,
+      _amountController.text.trim(),
+      rechargeApis.netAmount.value == ''?_amountController.text.trim():rechargeApis.netAmount.value,
+      '',
+      '',
+      '',
+      'Failed',
+    );
+    showSnackBar(responseMessage['message'], context);
+    await userController.fetchUserWalletBalance();
+    await transactionRechargeController.fetchAllTransactionRecharge();
+    await transactionRechargeController.fetchSuccessTransactionRecharge();
+    await transactionRechargeController.fetchPendingTransactionRecharge();
+    await transactionRechargeController.fetchFailedTransactionRecharge();
+    await transactionRechargeController.fetchInitiateTransactionRecharge();
+    await transactionRechargeController.fetchCancelledTransactionRecharge();
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _razorpay = Razorpay();
+    _razorpay.on(Razorpay.EVENT_PAYMENT_SUCCESS, _handlePaymentSuccess);
+    _razorpay.on(Razorpay.EVENT_PAYMENT_ERROR, _handlePaymentError);
+    _razorpay.on(Razorpay.EVENT_EXTERNAL_WALLET, _handleExternalWallet);
+    rechargeApis.clearCoupon();
+  }
 
   late bool _isLoading = false;
 
@@ -911,24 +912,24 @@ class _RechargeScreenState extends State<RechargeScreen> {
                 child: GestureDetector(
                   onTap: () async {
 
-                    // if (_amountController.text.trim().isEmpty) {
-                    //   showSnackBar('Enter Recharge amount', context);
-                    // } else {
-                    //   if (widget.code == "booking") {
-                    //     ///Implement the razorpay then pop
-                    //     setState(() {
-                    //       _isLoading = true;
-                    //     });
-                    //     openCheckout(
-                    //         double.parse(_amountController.text.trim()));
-                    //   } else {
-                    //     setState(() {
-                    //       _isLoading = true;
-                    //     });
-                    //     openCheckout(
-                    //         double.parse(_amountController.text.trim()));
-                    //   }
-                    // }
+                    if (_amountController.text.trim().isEmpty) {
+                      showSnackBar('Enter Recharge amount', context);
+                    } else {
+                      if (widget.code == "booking") {
+                        ///Implement the razorpay then pop
+                        setState(() {
+                          _isLoading = true;
+                        });
+                        openCheckout(
+                            double.parse(_amountController.text.trim()));
+                      } else {
+                        setState(() {
+                          _isLoading = true;
+                        });
+                        openCheckout(
+                            double.parse(_amountController.text.trim()));
+                      }
+                    }
                   },
                   child: Container(
                     height: 48,

@@ -37,6 +37,7 @@ class _RescheduleAppointmentRequestScreenState
     await appointmentsController.fetchCompletedAppointments();
     await appointmentsController.fetchCancelledAppointments();
     await appointmentsController.fetchRescheduledAppointments();
+    await appointmentsController.fetchRejectedAppointments();
   }
   @override
   Widget build(BuildContext context) {
@@ -47,7 +48,7 @@ class _RescheduleAppointmentRequestScreenState
       child: SingleChildScrollView(
         child: Container(
           constraints: BoxConstraints(
-              minHeight: MediaQuery.of(context).size.height * 0.8
+              minHeight: MediaQuery.of(context).size.height
           ),
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 22.0),
@@ -364,8 +365,7 @@ class _UpcomingWidgetState extends State<UpcomingWidget> {
               SizedBox(
                 width: 20,
               ),
-              widget.isMoreButton
-                  ? widget.appointmentModel.rescheduleStatus == ''?
+              widget.appointmentModel.userType == 'Consultant'?
               PopupMenuButton<int>(
                   padding: EdgeInsets.zero,
                   shadowColor: colorWhite,
@@ -499,7 +499,7 @@ class _UpcomingWidgetState extends State<UpcomingWidget> {
                                                         widget.appointmentModel.id,
                                                         widget.appointmentModel
                                                             .appointmentId,
-                                                        "Accept");
+                                                        "Reject");
 
                                                     Navigator.pop(context);
                                                     showSnackBar(response.toString(), context);
@@ -622,47 +622,7 @@ class _UpcomingWidgetState extends State<UpcomingWidget> {
                     Icons.more_vert,
                     color: Color(0xffCDCDCD),
                   ))
-                  : PopupMenuButton<int>(
-                      padding: EdgeInsets.zero,
-                      shadowColor: colorWhite,
-                      surfaceTintColor: colorWhite,
-                      color: colorWhite,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8)),
-                      itemBuilder: (context) => [
-                            PopupMenuItem<int>(
-                                padding: EdgeInsets.zero,
-                                onTap: () async {
-                                  // await consultantDetailsController.fetchUserData(widget.appointmentModel.consultantId, userController.userData().id);
-                                  // Navigator.push(
-                                  //     context,
-                                  //     MaterialPageRoute(
-                                  //         builder: (_) =>
-                                  //             RescheduleScreenTwo(
-                                  //               isReschedule: false,
-                                  //               consultantId:
-                                  //               widget.appointmentModel.consultantId,
-                                  //               consultantsDetailsModel: consultantDetailsController.userData(),
-                                  //             )));
-                                },
-                                child: Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 8.0),
-                                  child: Text(
-                                    "Book Again",
-                                    textAlign: TextAlign.start,
-                                    style: TextStyle(
-                                      fontFamily: "Bold",
-                                      fontSize: 12,
-                                      color: Color(0xff737B8B),
-                                    ),
-                                  ),
-                                )),
-                          ],
-                      child: Icon(
-                        Icons.more_vert,
-                        color: Color(0xffCDCDCD),
-                      ))
+
             ],
           ),
         ),

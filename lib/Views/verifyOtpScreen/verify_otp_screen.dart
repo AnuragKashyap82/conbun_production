@@ -54,7 +54,7 @@ class _VerifyOTPScreenState extends State<VerifyOTPScreen> {
     // TODO: implement initState
     super.initState();
     startTimer();
-    // getToken();
+    getToken();
     getDeviceId();
   }
 
@@ -64,11 +64,11 @@ class _VerifyOTPScreenState extends State<VerifyOTPScreen> {
     super.dispose();
   }
 
-  // Future<void> getToken() async {
-  //   String newToken = await NotificationServices().getDeviceToken();
-  //   verifyOtpApis.deviceToken.value = newToken;
-  //   print("Token!!!!!!!!!:${verifyOtpApis.deviceToken.value}");
-  // }
+  Future<void> getToken() async {
+    String newToken = await NotificationServices().getDeviceToken();
+    verifyOtpApis.deviceToken.value = newToken;
+    print("Token!!!!!!!!!:${verifyOtpApis.deviceToken.value}");
+  }
 
   Future<String?> getDeviceId() async {
     DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
@@ -229,7 +229,7 @@ class _VerifyOTPScreenState extends State<VerifyOTPScreen> {
                     setState(() {
                       errorText = '';
                     });
-                   final response =  await LoginApis().sendOTP(
+                    final response =  await LoginApis().sendOTP(
                       widget.mobileNo,
                       '',
                       verifyOtpApis.deviceId.value,
@@ -335,36 +335,36 @@ class _VerifyOTPScreenState extends State<VerifyOTPScreen> {
                     ),
                     GestureDetector(
                       onTap: () async {
-                       if(verifyOtpApis.isVerifyOTPButtonActive.value){
-                         verifyOtpApis.isVerifyOTPButtonActive.value = false;
-                         final response = await verifyOtpApis.verifyOTP(
-                           widget.mobileNo,
-                           otp,
-                           verifyOtpApis.deviceId.value,
-                           verifyOtpApis.deviceToken.value,
-                         );
-                         int error = response['Error'];
-                         String message = response['message'];
-                         // String mobileNo = response['data']['mobile'];
-                         //
-                         // showSnackBar(mobileNo, context);
-                         if (error == 0) {
-                           verifyOtpApis.isVerifyOTPButtonActive.value = true;
-                           await verifyOtpApis.saveToken(response['data']['id']);
-                           Navigator.pushReplacement(
-                             context,
-                             MaterialPageRoute(
-                                 builder: (_) => BottomNavScreen(currentTab: 0),
-                                 maintainState: false
-                             ),
+                        if(verifyOtpApis.isVerifyOTPButtonActive.value){
+                          verifyOtpApis.isVerifyOTPButtonActive.value = false;
+                          final response = await verifyOtpApis.verifyOTP(
+                            widget.mobileNo,
+                            otp,
+                            verifyOtpApis.deviceId.value,
+                            verifyOtpApis.deviceToken.value,
+                          );
+                          int error = response['Error'];
+                          String message = response['message'];
+                          // String mobileNo = response['data']['mobile'];
+                          //
+                          // showSnackBar(mobileNo, context);
+                          if (error == 0) {
+                            verifyOtpApis.isVerifyOTPButtonActive.value = true;
+                            await verifyOtpApis.saveToken(response['data']['id']);
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (_) => BottomNavScreen(currentTab: 0),
+                                  maintainState: false
+                              ),
 
-                           );
+                            );
 
-                         } else {
-                           verifyOtpApis.isVerifyOTPButtonActive.value = true;
-                           showSnackBar(message, context);
-                         }
-                       }
+                          } else {
+                            verifyOtpApis.isVerifyOTPButtonActive.value = true;
+                            showSnackBar(message, context);
+                          }
+                        }
                       },
                       child: Container(
                         height: 48,

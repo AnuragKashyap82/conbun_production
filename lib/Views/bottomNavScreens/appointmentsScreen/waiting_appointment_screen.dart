@@ -28,6 +28,7 @@ class _WaitingAppointmentScreenState extends State<WaitingAppointmentScreen> {
     await appointmentsController.fetchCompletedAppointments();
     await appointmentsController.fetchCancelledAppointments();
     await appointmentsController.fetchRescheduledAppointments();
+    await appointmentsController.fetchRejectedAppointments();
 
   }
   @override
@@ -41,7 +42,7 @@ class _WaitingAppointmentScreenState extends State<WaitingAppointmentScreen> {
           padding: const EdgeInsets.symmetric(horizontal: 22.0),
           child: Container(
             constraints: BoxConstraints(
-                minHeight: MediaQuery.of(context).size.height * 0.8
+                minHeight: MediaQuery.of(context).size.height
             ),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,

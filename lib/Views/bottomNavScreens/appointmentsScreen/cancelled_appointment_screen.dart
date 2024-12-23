@@ -27,6 +27,7 @@ class _CancelledAppointmentScreenState extends State<CancelledAppointmentScreen>
     await appointmentsController.fetchCompletedAppointments();
     await appointmentsController.fetchCancelledAppointments();
     await appointmentsController.fetchRescheduledAppointments();
+    await appointmentsController.fetchRejectedAppointments();
 
   }
   @override
@@ -38,7 +39,7 @@ class _CancelledAppointmentScreenState extends State<CancelledAppointmentScreen>
       child: SingleChildScrollView(
         child: Container(
           constraints: BoxConstraints(
-              minHeight: MediaQuery.of(context).size.height * 0.8
+              minHeight: MediaQuery.of(context).size.height
           ),
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 22.0),

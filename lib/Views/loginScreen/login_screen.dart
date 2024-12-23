@@ -3,6 +3,7 @@ import 'package:device_info_plus/device_info_plus.dart';
 import 'package:conbun_production/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sms_autofill/sms_autofill.dart';
 import '../../NotificationServices/notification_services.dart';
 import '../bottomNavScreens/bottomNavScreen.dart';
 import '../verifyOtpScreen/verify_otp_apis.dart';
@@ -29,16 +30,35 @@ class _LoginScreenState extends State<LoginScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    // getToken();
+    getToken();
     getDeviceId();
+    // Add listener to handle changes in the phone number
+    _mobileNoController.addListener(() {
+      String currentValue = _mobileNoController.text;
+
+      if (currentValue.isNotEmpty) {
+        // Trim to the last 10 digits if the length exceeds 10
+        String trimmedValue = currentValue.length > 10
+            ? currentValue.substring(currentValue.length - 10)
+            : currentValue;
+
+        if (trimmedValue != currentValue) {
+          // Update the controller only if the value is trimmed
+          _mobileNoController.text = trimmedValue;
+          _mobileNoController.selection = TextSelection.fromPosition(
+            TextPosition(offset: trimmedValue.length),
+          );
+        }
+      }
+    });
+  }
+  Future<void> getToken() async {
+    String newToken = await NotificationServices().getDeviceToken();
+    loginApis.deviceToken.value = newToken;
+    print("Token!!!!!!!!!:${loginApis.deviceToken.value}");
   }
 
-  // Future<void> getToken() async {
-  //   String newToken = await NotificationServices().getDeviceToken();
-  //   loginApis.deviceToken.value = newToken;
-  //   print("Token!!!!!!!!!:${loginApis.deviceToken.value}");
-  // }
-  bool _isChecked = true;
+  bool _isChecked = false;
 
   Future<String?> getDeviceId() async {
     DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
@@ -57,22 +77,50 @@ class _LoginScreenState extends State<LoginScreen> {
     return null;
   }
 
-  bool isMobileValid = false;
 
-  Future<void> isMobileNoValid(String mobileNo) async {
-    if (mobileNo.trim().length == 10) {
+  Future<void> sendOtp(BuildContext context) async{
+    setState(() {
+      errorText = '';
+    });
+    if (_isChecked) {
+      if (_mobileNoController.text.trim() ==
+          '7091767371') {
+        await verifyOtpApis.saveToken('1');
+        Get.offAll(BottomNavScreen(currentTab: 0));
+      } else {
+        final response = await loginApis.sendOTP(
+          _mobileNoController.text,
+          _referalCodeContriller.text.trim(),
+          loginApis.deviceId.value,
+          loginApis.deviceToken.value,
+        );
+        int error = await response['Error'];
+        String message = await response['message'];
+        // 'type 'String' is not a subtype of type 'int' of 'index'
+        if (error == 0) {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (_) => VerifyOTPScreen(
+                    mobileNo: _mobileNoController.text
+                        .toString(),
+                  )));
+        } else {
+          setState(() {
+            errorText = message;
+          });
+        }
+      }
+    }else{
       setState(() {
-        isMobileValid = true;
-      });
-    } else {
-      setState(() {
-        isMobileValid = false;
+        errorText = 'Please accept the term & conditions';
       });
     }
   }
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       backgroundColor: colorBackground,
       appBar: PreferredSize(
@@ -154,12 +202,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           width: 8,
                         ),
                         Expanded(
-                          child: TextFormField(
-                            keyboardType: TextInputType.phone,
-                            controller: _mobileNoController,
-                            onChanged: (value) {
-                              isMobileNoValid(value);
-                            },
+                          child: PhoneFieldHint(
                             decoration: InputDecoration(
                               hintText: 'Enter Mobile Number',
                               hintStyle: TextStyle(
@@ -172,44 +215,16 @@ class _LoginScreenState extends State<LoginScreen> {
                               enabledBorder: InputBorder.none,
                               focusedBorder: InputBorder.none,
                             ),
+                            controller: _mobileNoController,
+                            autoFocus: true,
                           ),
-                        )
+                        ),
                       ],
                     ),
                   ),
                   SizedBox(
                     height: 16,
                   ),
-                  // Container(
-                  //   height: 46,
-                  //   decoration: BoxDecoration(
-                  //     color: colorWhite,
-                  //     border: Border.all(color: Color(0xffE7E7E7), width: 1),
-                  //     borderRadius: BorderRadius.circular(6),
-                  //   ),
-                  //   child: Padding(
-                  //     padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                  //     child: TextFormField(
-                  //       keyboardType: TextInputType.text,
-                  //       controller: _referalCodeContriller,
-                  //       onChanged: (value) {
-                  //         isMobileNoValid(value);
-                  //       },
-                  //       decoration: InputDecoration(
-                  //         hintText: 'Enter Referal Code',
-                  //         hintStyle: TextStyle(
-                  //           fontSize: 14,
-                  //           fontWeight: FontWeight.w200,
-                  //           color: Color(0xff70798B),
-                  //           fontFamily: "SemiBold",
-                  //         ),
-                  //         contentPadding: EdgeInsets.only(bottom: 5),
-                  //         enabledBorder: InputBorder.none,
-                  //         focusedBorder: InputBorder.none,
-                  //       ),
-                  //     ),
-                  //   ),
-                  // ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
@@ -247,65 +262,30 @@ class _LoginScreenState extends State<LoginScreen> {
                   Obx(() {
                     return GestureDetector(
                       onTap: () async {
-                        if (isMobileValid) {
-                          if(_isChecked){
-                            if(_mobileNoController.text.trim() == '7091767371'){
-                              await verifyOtpApis.saveToken('1');
-                              Get.offAll(BottomNavScreen(currentTab: 0));
-                            }else{
-                              final response = await loginApis.sendOTP(
-                                _mobileNoController.text,
-                                _referalCodeContriller.text.trim(),
-                                loginApis.deviceId.value,
-                                loginApis.deviceToken.value,
-                              );
-                              int error = await response['Error'];
-                              String message = await response['message'];
-                              // 'type 'String' is not a subtype of type 'int' of 'index'
-                              if (error == 0) {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (_) => VerifyOTPScreen(
-                                          mobileNo:
-                                          _mobileNoController.text.toString(),
-                                        )));
-                              } else {
-                                setState(() {
-                                  errorText = message;
-                                });
-                              }
-                            }
-
-                          }
-                        } else {
-                          setState(() {
-                            errorText = 'invalid no';
-                          });
-                        }
+                       await sendOtp(context);
                       },
                       child: Container(
                         height: 48,
                         width: MediaQuery.of(context).size.width * 0.75,
                         decoration: BoxDecoration(
-                            color:  _isChecked && isMobileValid
+                            color: _isChecked
                                 ? colorBlack
                                 : colorBlack.withOpacity(0.5),
                             borderRadius: BorderRadius.circular(4)),
                         child: Center(
                           child: loginApis.isLoading.value
                               ? CircularProgressIndicator(
-                            strokeWidth: 2,
-                            color: colorOrange,
-                          )
+                                  strokeWidth: 2,
+                                  color: colorOrange,
+                                )
                               : Text(
-                            "Continue",
-                            style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w600,
-                                color: colorWhite,
-                                fontFamily: "SemiBold"),
-                          ),
+                                  "Continue",
+                                  style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w600,
+                                      color: colorWhite,
+                                      fontFamily: "SemiBold"),
+                                ),
                         ),
                       ),
                     );
@@ -323,46 +303,51 @@ class _LoginScreenState extends State<LoginScreen> {
                         SizedBox(
                           width: MediaQuery.of(context).size.width,
                         ),
-                        // Text(
-                        //   "By proceeding you are agreeing to",
-                        //   style: TextStyle(
-                        //       fontSize: 11,
-                        //       fontWeight: FontWeight.w600,
-                        //       color: Color(0xff60697B),
-                        //       fontFamily: "SemiBold"),
-                        // ),
-                        // Row(
-                        //   crossAxisAlignment: CrossAxisAlignment.center,
-                        //   mainAxisAlignment: MainAxisAlignment.center,
-                        //   children: [
-                        //     Checkbox(
-                        //       value: _isChecked,
-                        //       activeColor: colorOrange,
-                        //
-                        //       onChanged: (value) {
-                        //         setState(() {
-                        //           _isChecked = value!;
-                        //         });
-                        //       },
-                        //     ),
-                        //     TextButton(
-                        //       onPressed: () {
-                        //         setState(() {
-                        //           _isChecked = !_isChecked;
-                        //         });
-                        //       },
-                        //       child: Text(
-                        //         'I accept the Terms & Conditions',
-                        //         style: TextStyle(
-                        //             fontSize: 11,
-                        //             fontWeight: FontWeight.w600,
-                        //             color: Color(0xff3F78E0),
-                        //             fontFamily: "SemiBold"),
-                        //         textAlign: TextAlign.start,
-                        //       ),
-                        //     ),
-                        //   ],
-                        // ),
+                        Text(
+                          "By proceeding you are agreeing to",
+                          style: TextStyle(
+                              fontSize: 11,
+                              fontWeight: FontWeight.w600,
+                              color: Color(0xff60697B),
+                              fontFamily: "SemiBold"),
+                        ),
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Checkbox(
+                              value: _isChecked,
+                              activeColor: colorOrange,
+                              onChanged: (value) {
+                                setState(() {
+                                  _isChecked = value!;
+                                });
+                                if(_isChecked && _mobileNoController.text.trim().length == 10){
+                                  sendOtp(context);
+                                }
+                              },
+                            ),
+                            TextButton(
+                              onPressed: () {
+                                setState(() {
+                                  _isChecked = !_isChecked;
+                                });
+                                if(_isChecked && _mobileNoController.text.trim().length == 10){
+                                  sendOtp(context);
+                                }
+                              },
+                              child: Text(
+                                'I accept the Terms & Conditions',
+                                style: TextStyle(
+                                    fontSize: 11,
+                                    fontWeight: FontWeight.w600,
+                                    color: Color(0xff3F78E0),
+                                    fontFamily: "SemiBold"),
+                                textAlign: TextAlign.start,
+                              ),
+                            ),
+                          ],
+                        ),
                       ],
                     ),
                   ),
@@ -372,7 +357,6 @@ class _LoginScreenState extends State<LoginScreen> {
                 ],
               ),
             ),
-
           ],
         ),
       ),

@@ -413,8 +413,8 @@ class _UpcomingWidgetState extends State<UpcomingWidget> {
                     child: Icon(
                       Icons.more_vert,
                       color: Color(0xffCDCDCD),
-                    )):PopupMenuButton<int>
-                  (
+                    )):
+                PopupMenuButton<int>(
                     padding: EdgeInsets.zero,
                     shadowColor: colorWhite,
                     surfaceTintColor: colorWhite,

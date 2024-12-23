@@ -20,7 +20,7 @@ class WorkingHourRepository extends GetxController {
     final String requestBodyJson = jsonEncode(requestBody);
 
     final response = await http.post(
-      Uri.parse('${Constant.baseUrl}api/conbun_production/getWorkingHours'),
+      Uri.parse('${Constant.baseUrl}api/consultants/getWorkingHours'),
       headers: headers,
       body: requestBodyJson,
     );

@@ -127,20 +127,22 @@ class _RescheduleScreenTwoState extends State<RescheduleScreenTwo> {
     rescheduleAppointmentApis.selectedHour.value =await rescheduleAppointmentApis.rescheduleAppointModel().startTime;
     rescheduleAppointmentApis.selectedFormattedDate.value =await rescheduleAppointmentApis.rescheduleAppointModel().appointmentDate;
   }
-
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
-    // List<String> times = generateTimeSlots('09:30 AM', '06:30 PM');
-    if (widget.isReschedule) {
-      workingHourFuture = getWorkingHour();
-      getConsultantDetails();
-    } else {
-      rescheduleAppointmentApis.clearDateAndTime();
-      workingHourFuture = getWorkingHour();
-    }
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (mounted) {
+        if (widget.isReschedule) {
+          workingHourFuture = getWorkingHour();
+          getConsultantDetails();
+        } else {
+          rescheduleAppointmentApis.clearDateAndTime();
+          workingHourFuture = getWorkingHour();
+        }
+      }
+    });
   }
+
 
   void _onTimeSlotTap(int index, String hour) {
     rescheduleAppointmentApis.selectedIndex.value = index;

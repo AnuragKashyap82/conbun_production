@@ -129,6 +129,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
   //   NotificationServices().requestPermission();
   //   NotificationServices().initNotification();
   //   String newToken = await NotificationServices().getDeviceToken();
+  //   // updateTokennn(userController.userData().phoneNumber, newToken);
   // }
 
   // var controller = Get.put(IndividualChatController());
@@ -138,35 +139,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
     await consultantsController.fetchFeaturedConsultants();
     await consultantsController.fetchTopConsultants();
     await userController.fetchUserWalletBalance();
-  }
-
-  Future updateTokennn(String mobileNo, String deviceToken) async {
-    final requestBody = {
-      'mobile': mobileNo,
-      'devicetoken': deviceToken,
-    };
-    final String requestBodyJson = jsonEncode(requestBody);
-
-    try {
-      final response = await http.post(
-        Uri.parse('${Constant.baseUrl}api/auth/updateDeviceToken'),
-        headers: <String, String>{
-          'Content-Type': 'application/json',
-          'authtoken': Constant.authToken
-        },
-        body: requestBodyJson,
-      );
-      Map<String, dynamic> responseBody = json.decode(response.body);
-      print('object!!!!!!!QQQQQQQQQ $responseBody');
-      if (response.statusCode == 200) {
-        return responseBody;
-      } else {
-        return responseBody;
-      }
-    } catch (e) {
-      print('object!!!!!!!QQQQQQQQQ $e');
-      return "An error occurred: $e";
-    }
   }
 
   // else if(!isPermissionGranted){
@@ -926,63 +898,63 @@ class _DashboardScreenState extends State<DashboardScreen> {
               ),
             ),
           ),
-          // actions: [
-          //   GestureDetector(
-          //     onTap: () {
-          //       Navigator.push(context,
-          //           MaterialPageRoute(builder: (_) => const BalanceScreen()));
-          //     },
-          //     child: Container(
-          //       height: 52,
-          //       width: 52,
-          //       color: Colors.transparent,
-          //       child: Center(
-          //         child: SvgPicture.asset(
-          //           'assets/svg/wallet.svg',
-          //           width: 20,
-          //           height: 20,
-          //           color: colorViolet,
-          //         ),
-          //       ),
-          //     ),
-          //   ),
-          //   GestureDetector(
-          //     onTap: () {
-          //       Navigator.push(
-          //           context,
-          //           MaterialPageRoute(
-          //               builder: (_) => const SecondBalanceScreen()));
-          //       DateTime time = DateTime.now();
-          //       var channelid = '${time.millisecondsSinceEpoch}';
-          //       // controller.makeCall(
-          //       //     "1",
-          //       //     "anurag",
-          //       //     "widget.appointmentModel.profileImage",
-          //       //     channelid,
-          //       //     "anyra",
-          //       //     "jn",
-          //       //     "widget.appointmentModel.consultantId",
-          //       //     " widget.appointmentModel.appointmentDate",
-          //       //     "widget.appointmentModel.startTime");
-          //     },
-          //     child: Container(
-          //       height: 52,
-          //       width: 52,
-          //       color: Colors.transparent,
-          //       child: Center(
-          //         child: SvgPicture.asset(
-          //           'assets/svg/notification.svg',
-          //           width: 20,
-          //           height: 20,
-          //           color: colorViolet,
-          //         ),
-          //       ),
-          //     ),
-          //   ),
-          //   const SizedBox(
-          //     width: 16,
-          //   ),
-          // ],
+          actions: [
+            GestureDetector(
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (_) => const BalanceScreen()));
+              },
+              child: Container(
+                height: 52,
+                width: 52,
+                color: Colors.transparent,
+                child: Center(
+                  child: SvgPicture.asset(
+                    'assets/svg/wallet.svg',
+                    width: 20,
+                    height: 20,
+                    color: colorViolet,
+                  ),
+                ),
+              ),
+            ),
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (_) => const SecondBalanceScreen()));
+                DateTime time = DateTime.now();
+                var channelid = '${time.millisecondsSinceEpoch}';
+                // controller.makeCall(
+                //     "1",
+                //     "anurag",
+                //     "widget.appointmentModel.profileImage",
+                //     channelid,
+                //     "anyra",
+                //     "jn",
+                //     "widget.appointmentModel.consultantId",
+                //     " widget.appointmentModel.appointmentDate",
+                //     "widget.appointmentModel.startTime");
+              },
+              child: Container(
+                height: 52,
+                width: 52,
+                color: Colors.transparent,
+                child: Center(
+                  child: SvgPicture.asset(
+                    'assets/svg/notification.svg',
+                    width: 20,
+                    height: 20,
+                    color: colorViolet,
+                  ),
+                ),
+              ),
+            ),
+            const SizedBox(
+              width: 16,
+            ),
+          ],
         ),
         body: RefreshIndicator(
           onRefresh: () async {

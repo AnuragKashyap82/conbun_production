@@ -1,6 +1,7 @@
 import 'package:conbun_production/Controllers/appointments_controller.dart';
 import 'package:conbun_production/Views/bottomNavScreens/appointmentsScreen/cancelled_appointment_screen.dart';
 import 'package:conbun_production/Views/bottomNavScreens/appointmentsScreen/completed_appointment_screen.dart';
+import 'package:conbun_production/Views/bottomNavScreens/appointmentsScreen/rejected_appointment_screen.dart';
 import 'package:conbun_production/Views/bottomNavScreens/appointmentsScreen/reschedule_appointment_request_screen.dart';
 import 'package:conbun_production/Views/bottomNavScreens/appointmentsScreen/upcoming_appointment_screen.dart';
 import 'package:conbun_production/Views/appointmentDetailsScreen/appointment_details_screen.dart';
@@ -26,7 +27,7 @@ class _MyAppointmentScreenState extends State<MyAppointmentScreen>
   void initState() {
     // TODO: implement initState
     super.initState();
-    _tabController = TabController(length: 5, vsync: this);
+    _tabController = TabController(length: 6, vsync: this);
   }
   AppointmentsController appointmentsController = Get.find();
   Future<void> goToScreen() async {
@@ -122,6 +123,7 @@ class _MyAppointmentScreenState extends State<MyAppointmentScreen>
                       Tab(text: 'Upcoming'),
                       Tab(text: 'Completed'),
                       Tab(text: 'Cancelled'),
+                      Tab(text: 'Rejected'),
                       Tab(text: 'Rescheduled'),
                     ],
                   ),
@@ -138,6 +140,7 @@ class _MyAppointmentScreenState extends State<MyAppointmentScreen>
                   UpcomingAppointmentScreen(changeScreenFunction: goToScreen,goToScreenConsultantName: goToScreenConsultantName,),
                   CompletedAppointmentScreen(changeScreenFunction: goToScreen, goToScreenConsultantName: goToScreenConsultantName),
                   CancelledAppointmentScreen(changeScreenFunction: goToScreen, goToScreenConsultantName: goToScreenConsultantName),
+                  RejectedAppointmentScreen(changeScreenFunction: goToScreen, goToScreenConsultantName: goToScreenConsultantName),
                   RescheduleAppointmentRequestScreen(changeScreenFunction: goToScreen, goToScreenConsultantName: goToScreenConsultantName),
                 ],
               ),

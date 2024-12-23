@@ -11,6 +11,7 @@ import 'package:conbun_production/Views/help_center/help_center.dart';
 import 'package:conbun_production/Views/loginScreen/login_screen.dart';
 import 'package:conbun_production/Views/PoliciesScreen/term_condition_screen.dart';
 import 'package:conbun_production/utils/colors.dart';
+import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -19,6 +20,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shimmer_effect/shimmer_effect.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'PoliciesScreen/privacy_policy_screen.dart';
+import 'balance_screen.dart';
 import 'bottomNavScreens/bottomNavScreen.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -391,94 +393,94 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     SizedBox(
                       height: 16,
                     ),
-                    // Align(
-                    //   alignment: Alignment.center,
-                    //   child: Container(
-                    //     width: MediaQuery.of(context).size.width * 0.93,
-                    //     decoration: BoxDecoration(
-                    //         borderRadius: BorderRadius.circular(2),
-                    //         color: colorWhite),
-                    //     child: DottedBorder(
-                    //       color: Color(0xffE7E7E7),
-                    //       strokeWidth: 0.8,
-                    //       borderType: BorderType.RRect,
-                    //       radius: Radius.circular(0),
-                    //       dashPattern: [2],
-                    //       child: Padding(
-                    //         padding: const EdgeInsets.symmetric(
-                    //             horizontal: 26.0, vertical: 12),
-                    //         child: Row(
-                    //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    //           crossAxisAlignment: CrossAxisAlignment.center,
-                    //           children: [
-                    //             Column(
-                    //               mainAxisAlignment: MainAxisAlignment.center,
-                    //               crossAxisAlignment: CrossAxisAlignment.center,
-                    //               children: [
-                    //                 Text(
-                    //                   "Wallet Balance",
-                    //                   style: TextStyle(
-                    //                       fontSize: 13,
-                    //                       fontWeight: FontWeight.w800,
-                    //                       color: onBoardingTextColor,
-                    //                       fontFamily: "SemiBold"),
-                    //                 ),
-                    //                 SizedBox(
-                    //                   height: 6,
-                    //                 ),
-                    //                 Text(
-                    //                   "₹${userController.userWalletBalance.value}",
-                    //                   style: TextStyle(
-                    //                       fontSize: 14,
-                    //                       fontWeight: FontWeight.w800,
-                    //                       color: colorOrange,
-                    //                       fontFamily: "Bold"),
-                    //                 ),
-                    //               ],
-                    //             ),
-                    //             Container(
-                    //               height: 48,
-                    //               width: 0.8,
-                    //               color: Color(0xffE7E7E7),
-                    //             ),
-                    //             Column(
-                    //               mainAxisAlignment: MainAxisAlignment.center,
-                    //               crossAxisAlignment: CrossAxisAlignment.center,
-                    //               children: [
-                    //                 Text(
-                    //                   "Appointments",
-                    //                   style: TextStyle(
-                    //                       fontSize: 13,
-                    //                       fontWeight: FontWeight.w800,
-                    //                       color: onBoardingTextColor,
-                    //                       fontFamily: "SemiBold"),
-                    //                 ),
-                    //                 SizedBox(
-                    //                   height: 6,
-                    //                 ),
-                    //                 Obx(() {
-                    //                   return Text(
-                    //                     appointmentsController
-                    //                         .completedAppointments.length
-                    //                         .toString(),
-                    //                     style: TextStyle(
-                    //                         fontSize: 14,
-                    //                         fontWeight: FontWeight.w800,
-                    //                         color: colorOrange,
-                    //                         fontFamily: "Bold"),
-                    //                   );
-                    //                 }),
-                    //               ],
-                    //             ),
-                    //           ],
-                    //         ),
-                    //       ),
-                    //     ),
-                    //   ),
-                    // ),
-                    // SizedBox(
-                    //   height: 8,
-                    // ),
+                    Align(
+                      alignment: Alignment.center,
+                      child: Container(
+                        width: MediaQuery.of(context).size.width * 0.93,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(2),
+                            color: colorWhite),
+                        child: DottedBorder(
+                          color: Color(0xffE7E7E7),
+                          strokeWidth: 0.8,
+                          borderType: BorderType.RRect,
+                          radius: Radius.circular(0),
+                          dashPattern: [2],
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 26.0, vertical: 12),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      "Wallet Balance",
+                                      style: TextStyle(
+                                          fontSize: 13,
+                                          fontWeight: FontWeight.w800,
+                                          color: onBoardingTextColor,
+                                          fontFamily: "SemiBold"),
+                                    ),
+                                    SizedBox(
+                                      height: 6,
+                                    ),
+                                    Text(
+                                      "₹${userController.userWalletBalance.value}",
+                                      style: TextStyle(
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.w800,
+                                          color: colorOrange,
+                                          fontFamily: "Bold"),
+                                    ),
+                                  ],
+                                ),
+                                Container(
+                                  height: 48,
+                                  width: 0.8,
+                                  color: Color(0xffE7E7E7),
+                                ),
+                                Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      "Appointments",
+                                      style: TextStyle(
+                                          fontSize: 13,
+                                          fontWeight: FontWeight.w800,
+                                          color: onBoardingTextColor,
+                                          fontFamily: "SemiBold"),
+                                    ),
+                                    SizedBox(
+                                      height: 6,
+                                    ),
+                                    Obx(() {
+                                      return Text(
+                                        appointmentsController
+                                            .completedAppointments.length
+                                            .toString(),
+                                        style: TextStyle(
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.w800,
+                                            color: colorOrange,
+                                            fontFamily: "Bold"),
+                                      );
+                                    }),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 8,
+                    ),
                     GestureDetector(
                         onTap: () {
                           Navigator.push(
@@ -490,29 +492,29 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           title: 'Edit Profile',
                           svgName: 'user-regular',
                         )),
-                    // GestureDetector(
-                    //     onTap: () {
-                    //       Navigator.push(
-                    //           context,
-                    //           MaterialPageRoute(
-                    //               builder: (_) => const BalanceScreen()));
-                    //     },
-                    //     child: ProfileItems(
-                    //       title: 'Wallet',
-                    //       svgName: 'wallet',
-                    //     )),
-                    // GestureDetector(
-                    //   onTap: () {
-                    //     Navigator.push(
-                    //         context,
-                    //         MaterialPageRoute(
-                    //             builder: (_) => const TermConditionScreen()));
-                    //   },
-                    //   child: ProfileItems(
-                    //     title: 'Term & Conditions',
-                    //     svgName: 'term',
-                    //   ),
-                    // ),
+                    GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (_) => const BalanceScreen()));
+                        },
+                        child: ProfileItems(
+                          title: 'Wallet',
+                          svgName: 'wallet',
+                        )),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (_) => const TermConditionScreen()));
+                      },
+                      child: ProfileItems(
+                        title: 'Term & Conditions',
+                        svgName: 'term',
+                      ),
+                    ),
                     GestureDetector(
                       onTap: () {
                         Navigator.push(context,
@@ -523,18 +525,18 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         svgName: 'privacy',
                       ),
                     ),
-                    // GestureDetector(
-                    //   onTap: () {
-                    //     Navigator.push(
-                    //         context,
-                    //         MaterialPageRoute(
-                    //             builder: (_) => CancellationRefundScreen()));
-                    //   },
-                    //   child: ProfileItems(
-                    //     title: 'Cancellation & Refund',
-                    //     svgName: 'refund',
-                    //   ),
-                    // ),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (_) => CancellationRefundScreen()));
+                      },
+                      child: ProfileItems(
+                        title: 'Cancellation & Refund',
+                        svgName: 'refund',
+                      ),
+                    ),
                     GestureDetector(
                         onTap: () {
                           Navigator.push(context,
@@ -1665,7 +1667,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Text(
-                          'Fiestro',
+                          'Conbun',
                           style: TextStyle(
                             fontSize: 12,
                             fontWeight: FontWeight.w200,

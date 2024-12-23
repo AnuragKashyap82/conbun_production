@@ -188,7 +188,7 @@ class _BookAppointmentTwoScreenState extends State<BookAppointmentTwoScreen> {
                     showSnackBar("Enter Event Name", context);
                   } else if (_eventDetailsController.text.trim().isEmpty) {
                     showSnackBar("Enter Event Details", context);
-                  } else {
+                  }else {
                     String endTime = await bookAppointmentApis.getEndTime(
                         rescheduleAppointmentApis.selectedHour.value,
                         Duration(

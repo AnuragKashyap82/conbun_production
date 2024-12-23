@@ -5,21 +5,21 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:shimmer_effect/shimmer_effect.dart';
 
-class UpcomingAppointmentScreen extends StatefulWidget {
+class RejectedAppointmentScreen extends StatefulWidget {
   final VoidCallback changeScreenFunction;
   final VoidCallback goToScreenConsultantName;
 
-  const UpcomingAppointmentScreen(
+  const RejectedAppointmentScreen(
       {super.key,
       required this.changeScreenFunction,
       required this.goToScreenConsultantName});
 
   @override
-  State<UpcomingAppointmentScreen> createState() =>
-      _UpcomingAppointmentScreenState();
+  State<RejectedAppointmentScreen> createState() =>
+      _RejectedAppointmentScreenScreenState();
 }
 
-class _UpcomingAppointmentScreenState extends State<UpcomingAppointmentScreen> {
+class _RejectedAppointmentScreenScreenState extends State<RejectedAppointmentScreen> {
   AppointmentsController appointmentsController = Get.find();
   Future<void> refreshData() async {
     await appointmentsController.fetchWaitingAppointments();
@@ -29,12 +29,6 @@ class _UpcomingAppointmentScreenState extends State<UpcomingAppointmentScreen> {
     await appointmentsController.fetchRescheduledAppointments();
     await appointmentsController.fetchRejectedAppointments();
 
-  }
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    appointmentsController.fetchUpcomingAppointments();
   }
   @override
   Widget build(BuildContext context) {
@@ -118,19 +112,19 @@ class _UpcomingAppointmentScreenState extends State<UpcomingAppointmentScreen> {
                       ),
                     );
                   }
-                  if (appointmentsController.upcomingAppointments.isEmpty) {
-                    return Center(child: Text("No Upcoming Appointments"));
+                  if (appointmentsController.rejectedAppointments.isEmpty) {
+                    return Center(child: Text("No Rejected Appointments"));
                   }
                   return ListView.builder(
-                    itemCount: appointmentsController.upcomingAppointments.length,
+                    itemCount: appointmentsController.rejectedAppointments.length,
                     shrinkWrap: true,
                     primary: false,
                     physics: const NeverScrollableScrollPhysics(),
                     itemBuilder: (BuildContext context, int index) {
                       final appointments =
-                          appointmentsController.upcomingAppointments[index];
+                          appointmentsController.rejectedAppointments[index];
                       return UpcomingWidget(
-                          isDivider: index != appointmentsController.upcomingAppointments.length - 1,
+                          isDivider: index != appointmentsController.rejectedAppointments.length - 1,
                           changeScreenFunction: widget.changeScreenFunction,
                           goToScreenConsultantName: widget.goToScreenConsultantName,
                           call: 'call',

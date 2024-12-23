@@ -84,7 +84,6 @@ class AppointmentsRepository extends GetxController {
 
   Future<List<RescheduleRequestAppointmentModel>> getAllRescheduleAppointmentRequest(String userId, String limit) async {
     try {
-
       final requestBody = {
         "userid": userId,
         "user_type": "User",

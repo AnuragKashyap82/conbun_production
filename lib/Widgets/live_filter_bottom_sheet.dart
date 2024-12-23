@@ -262,7 +262,7 @@ class _LiveFilterBottomSheetItemsState extends State<LiveFilterBottomSheet> {
                 ),
                 FutureBuilder(
                   future: packageController
-                      .fetchAllLivePackages(userController.userData().id),
+                      .fetchAllLivePackages(widget.consultantModel.id),
                   builder: (context, snapshot) {
                     if (snapshot.connectionState == ConnectionState.waiting) {
                       return Center(child: CircularProgressIndicator());
@@ -471,10 +471,14 @@ class _LiveFilterBottomSheetItemsState extends State<LiveFilterBottomSheet> {
             child: GestureDetector(
               onTap: () async {
                 liveScreenApis.errorMessage.value = '';
-                if (liveScreenApis.currentLivePackage.value != '') {
-                  // liveScreenApis.errorMessage.value = 'Calling....';
-                  // DateTime time = DateTime.now();
-                  // var channelid = '${time.millisecondsSinceEpoch}';
+                if(userController.userData().name  == ''
+                    ||
+                   userController.userData().profileImage == ''){
+                  liveScreenApis.errorMessage.value = 'Complete your profile first';
+                }else if (liveScreenApis.currentLivePackage.value != '') {
+                  liveScreenApis.errorMessage.value = 'Calling....';
+                  DateTime time = DateTime.now();
+                  var channelid = '${time.millisecondsSinceEpoch}';
                   // await individualChatController.makeCall(
                   //     channelid,
                   //     userController.userData().id,

@@ -14,6 +14,8 @@ class VerifyOtpApis extends GetxController {
   Future verifyOTP(String mobile, String otp, String deviceid, String devicetoken) async {
     isLoading.value = true;
     isVerifyOTPButtonActive.value = false;
+    print(deviceid);
+    print(devicetoken);
     final requestBody = {
       'mobile': mobile,
       'otp': otp,

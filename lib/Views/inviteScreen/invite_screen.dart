@@ -238,7 +238,7 @@ class _InviteScreenState extends State<InviteScreen> {
                         width: 12,
                       ),
                       Text(
-                        "Invite your friends to Fiestro",
+                        "Invite your friends to Conbun",
                         style: TextStyle(
                             fontSize: 12,
                             fontWeight: FontWeight.w500,
@@ -372,7 +372,7 @@ class _InviteScreenState extends State<InviteScreen> {
                       ),
                       Expanded(
                         child: Text(
-                          "Invite your friends to Fiestro Invite your friends to Fiestro Invite your friends to Fiestro Invite your friends to Fiestro",
+                          "Invite your friends to Conbun Invite your friends to Conbun Invite your friends to Conbun Invite your friends to Conbun",
                           style: TextStyle(
                               fontSize: 12,
                               fontWeight: FontWeight.w500,
@@ -414,7 +414,7 @@ class _InviteScreenState extends State<InviteScreen> {
                       ),
                       Expanded(
                         child: Text(
-                          "Invite your friends to Fiestro Invite your friends to Fiestro Invite your friends to Fiestro Invite your friends to Fiestro",
+                          "Invite your friends to Conbun Invite your friends to Conbun Invite your friends to Conbun Invite your friends to Conbun",
                           style: TextStyle(
                               fontSize: 12,
                               fontWeight: FontWeight.w500,

@@ -13,9 +13,9 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  // NotificationServices().initLocalNotification();
-  // NotificationServices().initNotification();
-  // NotificationServices().initPushNotification();
+  NotificationServices().initLocalNotification();
+  NotificationServices().initNotification();
+  NotificationServices().initPushNotification();
   runApp(
     const MyApp(),
   );

@@ -39,12 +39,11 @@ class ConsultantsDetailsScreen extends StatefulWidget {
 }
 
 class _ConsultantsDetailsScreenState extends State<ConsultantsDetailsScreen> {
-  ConsultantDetailsController consultantDetailsController =
-      Get.put(ConsultantDetailsController());
+  ConsultantDetailsController consultantDetailsController = Get.put(ConsultantDetailsController());
   PortfolioController portfolioController = Get.put(PortfolioController());
   FollowerController followerController = Get.put(FollowerController());
   ConsultantDetailsApis consultantDetailsApis =
-      Get.put(ConsultantDetailsApis());
+  Get.put(ConsultantDetailsApis());
   UserController userController = Get.find();
 
   Future<void> fetchData() async {
@@ -68,23 +67,23 @@ class _ConsultantsDetailsScreenState extends State<ConsultantsDetailsScreen> {
     }
   }
 
-  // Future<void> permission() async {
-  //   final bool isPermission = await checkNotificationPermissionStatus();
-  //
-  //   if (isPermission) {
-  //   } else {
-  //     ScaffoldMessenger.of(context).showSnackBar(
-  //       SnackBar(
-  //         content:
-  //             Text("Notification permission is required to fetch messages."),
-  //         action: SnackBarAction(
-  //           label: "Settings",
-  //           onPressed: () => openAppSettings(),
-  //         ),
-  //       ),
-  //     );
-  //   }
-  // }
+  Future<void> permission() async {
+    final bool isPermission = await checkNotificationPermissionStatus();
+
+    if (isPermission) {
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content:
+          Text("Notification permission is required to fetch messages."),
+          action: SnackBarAction(
+            label: "Settings",
+            onPressed: () => openAppSettings(),
+          ),
+        ),
+      );
+    }
+  }
 
   @override
   void initState() {
@@ -137,7 +136,7 @@ class _ConsultantsDetailsScreenState extends State<ConsultantsDetailsScreen> {
                     size: 20,
                   )),
               title: Obx(
-                () {
+                    () {
                   return Text(
                     consultantDetailsController.userData().name,
                     style: TextStyle(
@@ -198,7 +197,7 @@ class _ConsultantsDetailsScreenState extends State<ConsultantsDetailsScreen> {
             return SingleChildScrollView(
               child: Padding(
                 padding:
-                    const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16),
+                const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -212,14 +211,15 @@ class _ConsultantsDetailsScreenState extends State<ConsultantsDetailsScreen> {
                           highlightColor: Colors.grey.shade100,
                           child: Container(
                             height: 126,
-                            width: 114,
+                            width:MediaQuery.of(context).size.width * 0.35,
                             color: Colors.grey,
                           ),
                         ),
                         const SizedBox(
                           width: 8,
                         ),
-                        Expanded(
+                        Container(
+                          width:MediaQuery.of(context).size.width * 0.55,
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -378,7 +378,7 @@ class _ConsultantsDetailsScreenState extends State<ConsultantsDetailsScreen> {
                         Container(
                           constraints: BoxConstraints(
                               maxWidth:
-                                  MediaQuery.of(context).size.width * 0.82),
+                              MediaQuery.of(context).size.width * 0.82),
                           child: SingleChildScrollView(
                             scrollDirection: Axis.horizontal,
                             child: Row(
@@ -396,10 +396,10 @@ class _ConsultantsDetailsScreenState extends State<ConsultantsDetailsScreen> {
                                         width: 56,
                                         decoration: BoxDecoration(
                                             borderRadius:
-                                                BorderRadius.circular(8)),
+                                            BorderRadius.circular(8)),
                                         child: ClipRRect(
                                             borderRadius:
-                                                BorderRadius.circular(8),
+                                            BorderRadius.circular(8),
                                             child: Image.asset(
                                               'assets/images/person.png',
                                               fit: BoxFit.cover,
@@ -417,10 +417,10 @@ class _ConsultantsDetailsScreenState extends State<ConsultantsDetailsScreen> {
                                         width: 56,
                                         decoration: BoxDecoration(
                                             borderRadius:
-                                                BorderRadius.circular(8)),
+                                            BorderRadius.circular(8)),
                                         child: ClipRRect(
                                             borderRadius:
-                                                BorderRadius.circular(8),
+                                            BorderRadius.circular(8),
                                             child: Image.asset(
                                               'assets/images/person.png',
                                               fit: BoxFit.cover,
@@ -438,10 +438,10 @@ class _ConsultantsDetailsScreenState extends State<ConsultantsDetailsScreen> {
                                         width: 56,
                                         decoration: BoxDecoration(
                                             borderRadius:
-                                                BorderRadius.circular(8)),
+                                            BorderRadius.circular(8)),
                                         child: ClipRRect(
                                             borderRadius:
-                                                BorderRadius.circular(8),
+                                            BorderRadius.circular(8),
                                             child: Image.asset(
                                               'assets/images/person.png',
                                               fit: BoxFit.cover,
@@ -459,10 +459,10 @@ class _ConsultantsDetailsScreenState extends State<ConsultantsDetailsScreen> {
                                         width: 56,
                                         decoration: BoxDecoration(
                                             borderRadius:
-                                                BorderRadius.circular(8)),
+                                            BorderRadius.circular(8)),
                                         child: ClipRRect(
                                             borderRadius:
-                                                BorderRadius.circular(8),
+                                            BorderRadius.circular(8),
                                             child: Image.asset(
                                               'assets/images/person.png',
                                               fit: BoxFit.cover,
@@ -480,10 +480,10 @@ class _ConsultantsDetailsScreenState extends State<ConsultantsDetailsScreen> {
                                         width: 56,
                                         decoration: BoxDecoration(
                                             borderRadius:
-                                                BorderRadius.circular(8)),
+                                            BorderRadius.circular(8)),
                                         child: ClipRRect(
                                             borderRadius:
-                                                BorderRadius.circular(8),
+                                            BorderRadius.circular(8),
                                             child: Image.asset(
                                               'assets/images/person.png',
                                               fit: BoxFit.cover,
@@ -501,10 +501,10 @@ class _ConsultantsDetailsScreenState extends State<ConsultantsDetailsScreen> {
                                         width: 56,
                                         decoration: BoxDecoration(
                                             borderRadius:
-                                                BorderRadius.circular(8)),
+                                            BorderRadius.circular(8)),
                                         child: ClipRRect(
                                             borderRadius:
-                                                BorderRadius.circular(8),
+                                            BorderRadius.circular(8),
                                             child: Image.asset(
                                               'assets/images/person.png',
                                               fit: BoxFit.cover,
@@ -522,10 +522,10 @@ class _ConsultantsDetailsScreenState extends State<ConsultantsDetailsScreen> {
                                         width: 56,
                                         decoration: BoxDecoration(
                                             borderRadius:
-                                                BorderRadius.circular(8)),
+                                            BorderRadius.circular(8)),
                                         child: ClipRRect(
                                             borderRadius:
-                                                BorderRadius.circular(8),
+                                            BorderRadius.circular(8),
                                             child: Image.asset(
                                               'assets/images/person.png',
                                               fit: BoxFit.cover,
@@ -543,10 +543,10 @@ class _ConsultantsDetailsScreenState extends State<ConsultantsDetailsScreen> {
                                         width: 56,
                                         decoration: BoxDecoration(
                                             borderRadius:
-                                                BorderRadius.circular(8)),
+                                            BorderRadius.circular(8)),
                                         child: ClipRRect(
                                             borderRadius:
-                                                BorderRadius.circular(8),
+                                            BorderRadius.circular(8),
                                             child: Image.asset(
                                               'assets/images/person.png',
                                               fit: BoxFit.cover,
@@ -615,7 +615,7 @@ class _ConsultantsDetailsScreenState extends State<ConsultantsDetailsScreen> {
             return SingleChildScrollView(
               child: Padding(
                 padding:
-                    const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16),
+                const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -650,12 +650,12 @@ class _ConsultantsDetailsScreenState extends State<ConsultantsDetailsScreen> {
                                       width: MediaQuery.of(context).size.width *
                                           0.35,
                                       height:
-                                          MediaQuery.of(context).size.height *
-                                              0.2,
+                                      MediaQuery.of(context).size.height *
+                                          0.2,
                                       decoration: BoxDecoration(
                                           color: Colors.grey.shade200,
                                           borderRadius:
-                                              BorderRadius.circular(6)),
+                                          BorderRadius.circular(6)),
                                     ),
                                   );
                                 }
@@ -664,9 +664,9 @@ class _ConsultantsDetailsScreenState extends State<ConsultantsDetailsScreen> {
                                   StackTrace? stackTrace) {
                                 return Container(
                                   width:
-                                      MediaQuery.of(context).size.width * 0.35,
+                                  MediaQuery.of(context).size.width * 0.35,
                                   height:
-                                      MediaQuery.of(context).size.height * 0.2,
+                                  MediaQuery.of(context).size.height * 0.2,
                                   decoration: BoxDecoration(
                                       color: Colors.grey.shade200,
                                       borderRadius: BorderRadius.circular(6)),
@@ -681,7 +681,8 @@ class _ConsultantsDetailsScreenState extends State<ConsultantsDetailsScreen> {
                           const SizedBox(
                             width: 8,
                           ),
-                          Expanded(
+                          Container(
+                            width:MediaQuery.of(context).size.width * 0.55,
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -708,8 +709,8 @@ class _ConsultantsDetailsScreenState extends State<ConsultantsDetailsScreen> {
                                 Container(
                                   constraints: BoxConstraints(
                                       maxWidth:
-                                          MediaQuery.of(context).size.width *
-                                              0.5),
+                                      MediaQuery.of(context).size.width *
+                                          0.5),
                                   child: Text(
                                     consultantDetailsController
                                         .userData()
@@ -780,83 +781,84 @@ class _ConsultantsDetailsScreenState extends State<ConsultantsDetailsScreen> {
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
-                                    Expanded(
-                                      child: GestureDetector(
-                                        onTap: () async {
-                                          final message =
-                                              await consultantDetailsApis
-                                                  .followConsultant(
-                                                      userController
-                                                          .userData()
-                                                          .id,
-                                                      consultantDetailsController
-                                                          .userData()
-                                                          .id);
-                                          String msg = message['message'];
-                                          await followerController
-                                              .fetchAllFollowers();
-                                          showSnackBar(msg, context);
-                                          setState(() {
+                                    GestureDetector(
+                                      onTap: () async {
+                                        final message =
+                                        await consultantDetailsApis
+                                            .followConsultant(
+                                            userController
+                                                .userData()
+                                                .id,
                                             consultantDetailsController
+                                                .userData()
+                                                .id);
+                                        String msg = message['message'];
+                                        await followerController
+                                            .fetchAllFollowers();
+                                        showSnackBar(msg, context);
+                                        setState(() {
+                                          consultantDetailsController
+                                              .userData()
+                                              .isFollow =
+                                          !consultantDetailsController
+                                              .userData()
+                                              .isFollow;
+                                        });
+                                      },
+                                      child: Container(
+                                        height: 38,
+                                        width: MediaQuery.of(context).size.width * 0.3,
+                                        decoration: BoxDecoration(
+                                            borderRadius:
+                                            BorderRadius.circular(4),
+                                            border:
+                                            Border.all(color: colorBlack),
+                                            color: consultantDetailsController
+                                                .userData()
+                                                .isFollow
+                                                ? colorBlack
+                                                : Colors.transparent),
+                                        child: Center(
+                                          child: Row(
+                                            mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                            crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                            children: [
+                                              // isFollowing?SizedBox():
+                                              Icon(
+                                                Icons.person_add,
+                                                color:
+                                                consultantDetailsController
                                                     .userData()
-                                                    .isFollow =
-                                                !consultantDetailsController
+                                                    .isFollow
+                                                    ? colorWhite
+                                                    : colorBlack,
+                                              ),
+                                              const SizedBox(
+                                                width: 8,
+                                              ),
+                                              Text(
+                                                consultantDetailsController
                                                     .userData()
-                                                    .isFollow;
-                                          });
-                                        },
-                                        child: Container(
-                                          height: 38,
-                                          decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(4),
-                                              border:
-                                                  Border.all(color: colorBlack),
-                                              color: consultantDetailsController
-                                                      .userData()
-                                                      .isFollow
-                                                  ? colorBlack
-                                                  : Colors.transparent),
-                                          child: Center(
-                                            child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.center,
-                                              children: [
-                                                // isFollowing?SizedBox():
-                                                Icon(
-                                                  Icons.person_add,
-                                                  color:
-                                                      consultantDetailsController
-                                                              .userData()
-                                                              .isFollow
-                                                          ? colorWhite
-                                                          : colorBlack,
-                                                ),
-                                                const SizedBox(
-                                                  width: 8,
-                                                ),
-                                                Text(
-                                                  consultantDetailsController
-                                                          .userData()
-                                                          .isFollow
-                                                      ? "Following"
-                                                      : 'Follow',
-                                                  style: TextStyle(
-                                                      fontSize: 12,
-                                                      fontWeight:
-                                                          FontWeight.w200,
-                                                      color:
-                                                          consultantDetailsController
-                                                                  .userData()
-                                                                  .isFollow
-                                                              ? colorWhite
-                                                              : colorBlack,
-                                                      fontFamily: "Bold"),
-                                                ),
-                                              ],
-                                            ),
+                                                    .isFollow
+                                                    ? "Following"
+                                                    : 'Follow',
+                                                style: TextStyle(
+                                                    fontSize: 12,
+                                                    fontWeight:
+                                                    FontWeight.w200,
+                                                    color:
+                                                    consultantDetailsController
+                                                        .userData()
+                                                        .isFollow
+                                                        ? colorWhite
+                                                        : colorBlack,
+                                                    fontFamily: "Bold"),
+                                                maxLines: 1,
+                                                overflow: TextOverflow.ellipsis,
+                                              ),
+                                            ],
                                           ),
                                         ),
                                       ),
@@ -864,89 +866,73 @@ class _ConsultantsDetailsScreenState extends State<ConsultantsDetailsScreen> {
                                     SizedBox(
                                       width: 8,
                                     ),
-                                    // Expanded(
-                                    //   child: GestureDetector(
-                                    //     onTap: () async {
-                                    //       final bool isPermission =
-                                    //           await checkNotificationPermissionStatus();
-                                    //       if (isPermission) {
-                                    //         if (userController.userData().name == '' ||
-                                    //             userController
-                                    //                     .userData()
-                                    //                     .state ==
-                                    //                 '' ||
-                                    //             userController
-                                    //                     .userData()
-                                    //                     .country ==
-                                    //                 '' ||
-                                    //             userController
-                                    //                     .userData()
-                                    //                     .city ==
-                                    //                 '' ||
-                                    //             userController
-                                    //                     .userData()
-                                    //                     .profileImage ==
-                                    //                 '') {
-                                    //           showSnackBar(
-                                    //               'Complete Your Profile',
-                                    //               context);
-                                    //           Navigator.push(
-                                    //               context,
-                                    //               MaterialPageRoute(
-                                    //                   builder: (_) =>
-                                    //                       EditProfileScreen(
-                                    //                           code:
-                                    //                               'appointment')));
-                                    //         } else {
-                                    //           Navigator.push(
-                                    //               context,
-                                    //               MaterialPageRoute(
-                                    //                   builder: (_) =>
-                                    //                       RescheduleScreenTwo(
-                                    //                         isReschedule: false,
-                                    //                         consultantId:
-                                    //                             consultantDetailsController
-                                    //                                 .userData()
-                                    //                                 .id,
-                                    //                         consultantsDetailsModel:
-                                    //                             consultantDetailsController
-                                    //                                 .userData(),
-                                    //                       )));
-                                    //         }
-                                    //       } else {
-                                    //         ScaffoldMessenger.of(context)
-                                    //             .showSnackBar(
-                                    //           SnackBar(
-                                    //             content: Text(
-                                    //                 "Notification permission is required to fetch messages."),
-                                    //             action: SnackBarAction(
-                                    //               label: "Settings",
-                                    //               onPressed: () =>
-                                    //                   openAppSettings(),
-                                    //             ),
-                                    //           ),
-                                    //         );
-                                    //       }
-                                    //     },
-                                    //     child: Container(
-                                    //       height: 38,
-                                    //       decoration: BoxDecoration(
-                                    //           borderRadius:
-                                    //               BorderRadius.circular(4),
-                                    //           color: colorBlack),
-                                    //       child: const Center(
-                                    //         child: Text(
-                                    //           "Let's Talk",
-                                    //           style: TextStyle(
-                                    //               fontSize: 12,
-                                    //               fontWeight: FontWeight.w200,
-                                    //               color: colorWhite,
-                                    //               fontFamily: "Bold"),
-                                    //         ),
-                                    //       ),
-                                    //     ),
-                                    //   ),
-                                    // ),
+                                    GestureDetector(
+                                      onTap: () async {
+                                        if (userController.userData().name == '' ||
+                                            userController
+                                                .userData()
+                                                .state ==
+                                                '' ||
+                                            userController
+                                                .userData()
+                                                .country ==
+                                                '' ||
+                                            userController
+                                                .userData()
+                                                .city ==
+                                                '' ||
+                                            userController
+                                                .userData()
+                                                .profileImage ==
+                                                '') {
+                                          showSnackBar(
+                                              'Complete Your Profile',
+                                              context);
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (_) =>
+                                                      EditProfileScreen(
+                                                          code:
+                                                          'appointment')));
+                                        } else {
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (_) =>
+                                                      RescheduleScreenTwo(
+                                                        isReschedule: false,
+                                                        consultantId:
+                                                        consultantDetailsController
+                                                            .userData()
+                                                            .id,
+                                                        consultantsDetailsModel:
+                                                        consultantDetailsController
+                                                            .userData(),
+                                                      )));
+                                        }
+                                      },
+                                      child: Container(
+                                        height: 38,
+                                        width: MediaQuery.of(context).size.width * 0.22,
+                                        decoration: BoxDecoration(
+                                            borderRadius:
+                                            BorderRadius.circular(4),
+                                            color: colorBlack),
+                                        child:  Center(
+                                          child: Text(
+                                            "Let's Talk",
+                                            style: TextStyle(
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.w200,
+                                                color: colorWhite,
+                                                fontFamily: "Bold"),
+                                            maxLines: 1,
+                                            overflow: TextOverflow.ellipsis,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
                                   ],
                                 ),
                               ],
@@ -955,6 +941,7 @@ class _ConsultantsDetailsScreenState extends State<ConsultantsDetailsScreen> {
                         ],
                       ),
                     ),
+
                     SizedBox(
                       height: 26,
                     ),
@@ -1105,7 +1092,7 @@ class _ConsultantsDetailsScreenState extends State<ConsultantsDetailsScreen> {
                                     context,
                                     MaterialPageRoute(
                                         builder: (_) =>
-                                            const PortfolioScreen()));
+                                        const PortfolioScreen()));
                               },
                               child: const Text(
                                 "View All",
@@ -1146,7 +1133,7 @@ class _ConsultantsDetailsScreenState extends State<ConsultantsDetailsScreen> {
                                 return Icon(
                                   Icons.arrow_back_ios_new_outlined,
                                   color:
-                                      const Color(0xff0D0D0D).withOpacity(0.3),
+                                  const Color(0xff0D0D0D).withOpacity(0.3),
                                   size: 12,
                                 );
                               }
@@ -1157,7 +1144,7 @@ class _ConsultantsDetailsScreenState extends State<ConsultantsDetailsScreen> {
                             Container(
                               constraints: BoxConstraints(
                                   maxWidth:
-                                      MediaQuery.of(context).size.width * 0.82),
+                                  MediaQuery.of(context).size.width * 0.82),
                               child: SizedBox(
                                 height: 72,
                                 child: Obx(() {
@@ -1167,29 +1154,29 @@ class _ConsultantsDetailsScreenState extends State<ConsultantsDetailsScreen> {
                                         scrollDirection: Axis.horizontal,
                                         child: Row(
                                           mainAxisAlignment:
-                                              MainAxisAlignment.start,
+                                          MainAxisAlignment.start,
                                           crossAxisAlignment:
-                                              CrossAxisAlignment.center,
+                                          CrossAxisAlignment.center,
                                           children: [
                                             Padding(
                                               padding:
-                                                  const EdgeInsets.symmetric(
-                                                      horizontal: 4.0),
+                                              const EdgeInsets.symmetric(
+                                                  horizontal: 4.0),
                                               child: ShimmerEffect(
                                                 baseColor: Colors.grey.shade300,
                                                 highlightColor:
-                                                    Colors.grey.shade100,
+                                                Colors.grey.shade100,
                                                 child: Container(
                                                     height: 56,
                                                     width: 56,
                                                     decoration: BoxDecoration(
                                                         borderRadius:
-                                                            BorderRadius
-                                                                .circular(8)),
+                                                        BorderRadius
+                                                            .circular(8)),
                                                     child: ClipRRect(
                                                         borderRadius:
-                                                            BorderRadius
-                                                                .circular(8),
+                                                        BorderRadius
+                                                            .circular(8),
                                                         child: Image.asset(
                                                           'assets/images/person.png',
                                                           fit: BoxFit.cover,
@@ -1198,23 +1185,23 @@ class _ConsultantsDetailsScreenState extends State<ConsultantsDetailsScreen> {
                                             ),
                                             Padding(
                                               padding:
-                                                  const EdgeInsets.symmetric(
-                                                      horizontal: 4.0),
+                                              const EdgeInsets.symmetric(
+                                                  horizontal: 4.0),
                                               child: ShimmerEffect(
                                                 baseColor: Colors.grey.shade300,
                                                 highlightColor:
-                                                    Colors.grey.shade100,
+                                                Colors.grey.shade100,
                                                 child: Container(
                                                     height: 56,
                                                     width: 56,
                                                     decoration: BoxDecoration(
                                                         borderRadius:
-                                                            BorderRadius
-                                                                .circular(8)),
+                                                        BorderRadius
+                                                            .circular(8)),
                                                     child: ClipRRect(
                                                         borderRadius:
-                                                            BorderRadius
-                                                                .circular(8),
+                                                        BorderRadius
+                                                            .circular(8),
                                                         child: Image.asset(
                                                           'assets/images/person.png',
                                                           fit: BoxFit.cover,
@@ -1223,23 +1210,23 @@ class _ConsultantsDetailsScreenState extends State<ConsultantsDetailsScreen> {
                                             ),
                                             Padding(
                                               padding:
-                                                  const EdgeInsets.symmetric(
-                                                      horizontal: 4.0),
+                                              const EdgeInsets.symmetric(
+                                                  horizontal: 4.0),
                                               child: ShimmerEffect(
                                                 baseColor: Colors.grey.shade300,
                                                 highlightColor:
-                                                    Colors.grey.shade100,
+                                                Colors.grey.shade100,
                                                 child: Container(
                                                     height: 56,
                                                     width: 56,
                                                     decoration: BoxDecoration(
                                                         borderRadius:
-                                                            BorderRadius
-                                                                .circular(8)),
+                                                        BorderRadius
+                                                            .circular(8)),
                                                     child: ClipRRect(
                                                         borderRadius:
-                                                            BorderRadius
-                                                                .circular(8),
+                                                        BorderRadius
+                                                            .circular(8),
                                                         child: Image.asset(
                                                           'assets/images/person.png',
                                                           fit: BoxFit.cover,
@@ -1248,23 +1235,23 @@ class _ConsultantsDetailsScreenState extends State<ConsultantsDetailsScreen> {
                                             ),
                                             Padding(
                                               padding:
-                                                  const EdgeInsets.symmetric(
-                                                      horizontal: 4.0),
+                                              const EdgeInsets.symmetric(
+                                                  horizontal: 4.0),
                                               child: ShimmerEffect(
                                                 baseColor: Colors.grey.shade300,
                                                 highlightColor:
-                                                    Colors.grey.shade100,
+                                                Colors.grey.shade100,
                                                 child: Container(
                                                     height: 56,
                                                     width: 56,
                                                     decoration: BoxDecoration(
                                                         borderRadius:
-                                                            BorderRadius
-                                                                .circular(8)),
+                                                        BorderRadius
+                                                            .circular(8)),
                                                     child: ClipRRect(
                                                         borderRadius:
-                                                            BorderRadius
-                                                                .circular(8),
+                                                        BorderRadius
+                                                            .circular(8),
                                                         child: Image.asset(
                                                           'assets/images/person.png',
                                                           fit: BoxFit.cover,
@@ -1273,23 +1260,23 @@ class _ConsultantsDetailsScreenState extends State<ConsultantsDetailsScreen> {
                                             ),
                                             Padding(
                                               padding:
-                                                  const EdgeInsets.symmetric(
-                                                      horizontal: 4.0),
+                                              const EdgeInsets.symmetric(
+                                                  horizontal: 4.0),
                                               child: ShimmerEffect(
                                                 baseColor: Colors.grey.shade300,
                                                 highlightColor:
-                                                    Colors.grey.shade100,
+                                                Colors.grey.shade100,
                                                 child: Container(
                                                     height: 56,
                                                     width: 56,
                                                     decoration: BoxDecoration(
                                                         borderRadius:
-                                                            BorderRadius
-                                                                .circular(8)),
+                                                        BorderRadius
+                                                            .circular(8)),
                                                     child: ClipRRect(
                                                         borderRadius:
-                                                            BorderRadius
-                                                                .circular(8),
+                                                        BorderRadius
+                                                            .circular(8),
                                                         child: Image.asset(
                                                           'assets/images/person.png',
                                                           fit: BoxFit.cover,
@@ -1298,23 +1285,23 @@ class _ConsultantsDetailsScreenState extends State<ConsultantsDetailsScreen> {
                                             ),
                                             Padding(
                                               padding:
-                                                  const EdgeInsets.symmetric(
-                                                      horizontal: 4.0),
+                                              const EdgeInsets.symmetric(
+                                                  horizontal: 4.0),
                                               child: ShimmerEffect(
                                                 baseColor: Colors.grey.shade300,
                                                 highlightColor:
-                                                    Colors.grey.shade100,
+                                                Colors.grey.shade100,
                                                 child: Container(
                                                     height: 56,
                                                     width: 56,
                                                     decoration: BoxDecoration(
                                                         borderRadius:
-                                                            BorderRadius
-                                                                .circular(8)),
+                                                        BorderRadius
+                                                            .circular(8)),
                                                     child: ClipRRect(
                                                         borderRadius:
-                                                            BorderRadius
-                                                                .circular(8),
+                                                        BorderRadius
+                                                            .circular(8),
                                                         child: Image.asset(
                                                           'assets/images/person.png',
                                                           fit: BoxFit.cover,
@@ -1323,23 +1310,23 @@ class _ConsultantsDetailsScreenState extends State<ConsultantsDetailsScreen> {
                                             ),
                                             Padding(
                                               padding:
-                                                  const EdgeInsets.symmetric(
-                                                      horizontal: 4.0),
+                                              const EdgeInsets.symmetric(
+                                                  horizontal: 4.0),
                                               child: ShimmerEffect(
                                                 baseColor: Colors.grey.shade300,
                                                 highlightColor:
-                                                    Colors.grey.shade100,
+                                                Colors.grey.shade100,
                                                 child: Container(
                                                     height: 56,
                                                     width: 56,
                                                     decoration: BoxDecoration(
                                                         borderRadius:
-                                                            BorderRadius
-                                                                .circular(8)),
+                                                        BorderRadius
+                                                            .circular(8)),
                                                     child: ClipRRect(
                                                         borderRadius:
-                                                            BorderRadius
-                                                                .circular(8),
+                                                        BorderRadius
+                                                            .circular(8),
                                                         child: Image.asset(
                                                           'assets/images/person.png',
                                                           fit: BoxFit.cover,
@@ -1348,23 +1335,23 @@ class _ConsultantsDetailsScreenState extends State<ConsultantsDetailsScreen> {
                                             ),
                                             Padding(
                                               padding:
-                                                  const EdgeInsets.symmetric(
-                                                      horizontal: 4.0),
+                                              const EdgeInsets.symmetric(
+                                                  horizontal: 4.0),
                                               child: ShimmerEffect(
                                                 baseColor: Colors.grey.shade300,
                                                 highlightColor:
-                                                    Colors.grey.shade100,
+                                                Colors.grey.shade100,
                                                 child: Container(
                                                     height: 56,
                                                     width: 56,
                                                     decoration: BoxDecoration(
                                                         borderRadius:
-                                                            BorderRadius
-                                                                .circular(8)),
+                                                        BorderRadius
+                                                            .circular(8)),
                                                     child: ClipRRect(
                                                         borderRadius:
-                                                            BorderRadius
-                                                                .circular(8),
+                                                        BorderRadius
+                                                            .circular(8),
                                                         child: Image.asset(
                                                           'assets/images/person.png',
                                                           fit: BoxFit.cover,
@@ -1397,8 +1384,8 @@ class _ConsultantsDetailsScreenState extends State<ConsultantsDetailsScreen> {
                                           itemBuilder: (BuildContext context,
                                               int index) {
                                             final portfolio =
-                                                portfolioController
-                                                    .allPortfolio[index];
+                                            portfolioController
+                                                .allPortfolio[index];
                                             return GestureDetector(
                                               // onTap: () {
                                               //   // if (portfolio.filetype
@@ -1424,14 +1411,14 @@ class _ConsultantsDetailsScreenState extends State<ConsultantsDetailsScreen> {
                                                   builder: (_) {
                                                     return Dialog(
                                                       backgroundColor:
-                                                          Colors.transparent,
+                                                      Colors.transparent,
                                                       insetPadding:
-                                                          EdgeInsets.all(10),
+                                                      EdgeInsets.all(10),
                                                       child: Container(
                                                         height: MediaQuery.of(
-                                                                    context)
-                                                                .size
-                                                                .height *
+                                                            context)
+                                                            .size
+                                                            .height *
                                                             0.6,
                                                         // You can adjust the height based on your design
                                                         child: Column(
@@ -1439,18 +1426,18 @@ class _ConsultantsDetailsScreenState extends State<ConsultantsDetailsScreen> {
                                                             // Header or Close button (optional)
                                                             Align(
                                                               alignment:
-                                                                  Alignment
-                                                                      .topRight,
+                                                              Alignment
+                                                                  .topRight,
                                                               child: IconButton(
                                                                 color:
-                                                                    colorViolet,
+                                                                colorViolet,
                                                                 icon: Icon(
                                                                     Icons.close,
                                                                     color: Colors
                                                                         .white),
                                                                 onPressed: () {
                                                                   Navigator.of(
-                                                                          context)
+                                                                      context)
                                                                       .pop();
                                                                 },
                                                               ),
@@ -1463,45 +1450,45 @@ class _ConsultantsDetailsScreenState extends State<ConsultantsDetailsScreen> {
                                                               child: PageView
                                                                   .builder(
                                                                 controller:
-                                                                    PageController(
-                                                                        initialPage:
-                                                                            index),
+                                                                PageController(
+                                                                    initialPage:
+                                                                    index),
                                                                 scrollDirection:
-                                                                    Axis.horizontal,
+                                                                Axis.horizontal,
                                                                 itemCount:
-                                                                    portfolioController
-                                                                        .allPortfolio
-                                                                        .length,
+                                                                portfolioController
+                                                                    .allPortfolio
+                                                                    .length,
                                                                 itemBuilder:
                                                                     (context,
-                                                                        pageIndex) {
+                                                                    pageIndex) {
                                                                   final portfolio =
-                                                                      portfolioController
-                                                                              .allPortfolio[
-                                                                          pageIndex];
+                                                                  portfolioController
+                                                                      .allPortfolio[
+                                                                  pageIndex];
                                                                   return portfolio
-                                                                          .filetype
-                                                                          .contains(
-                                                                              "image")
+                                                                      .filetype
+                                                                      .contains(
+                                                                      "image")
                                                                       ? ClipRRect(
-                                                                          borderRadius:
-                                                                              BorderRadius.circular(8),
-                                                                          child:
-                                                                              PhotoView(
-                                                                            backgroundDecoration:
-                                                                                BoxDecoration(color: Colors.transparent),
-                                                                            imageProvider:
-                                                                                NetworkImage(
-                                                                              portfolio.fileUrl,
-                                                                            ),
-                                                                          ),
-                                                                        )
+                                                                    borderRadius:
+                                                                    BorderRadius.circular(8),
+                                                                    child:
+                                                                    PhotoView(
+                                                                      backgroundDecoration:
+                                                                      BoxDecoration(color: Colors.transparent),
+                                                                      imageProvider:
+                                                                      NetworkImage(
+                                                                        portfolio.fileUrl,
+                                                                      ),
+                                                                    ),
+                                                                  )
                                                                       : VideoPlayerScreen(
-                                                                          videoUrl:
-                                                                              portfolio.fileUrl,
-                                                                          isAppBar:
-                                                                              false,
-                                                                        );
+                                                                    videoUrl:
+                                                                    portfolio.fileUrl,
+                                                                    isAppBar:
+                                                                    false,
+                                                                  );
                                                                 },
                                                               ),
                                                             ),
@@ -1515,9 +1502,9 @@ class _ConsultantsDetailsScreenState extends State<ConsultantsDetailsScreen> {
 
                                               child: Padding(
                                                 padding:
-                                                    const EdgeInsets.symmetric(
-                                                            horizontal: 2.0)
-                                                        .copyWith(right: 3),
+                                                const EdgeInsets.symmetric(
+                                                    horizontal: 2.0)
+                                                    .copyWith(right: 3),
                                                 child: Container(
                                                     height: 72,
                                                     width: 64,
@@ -1525,78 +1512,78 @@ class _ConsultantsDetailsScreenState extends State<ConsultantsDetailsScreen> {
                                                         color: Colors
                                                             .grey.shade200,
                                                         borderRadius:
-                                                            BorderRadius
-                                                                .circular(8)),
+                                                        BorderRadius
+                                                            .circular(8)),
                                                     child: Stack(
                                                       children: [
                                                         portfolio.filetype
-                                                                .contains(
-                                                                    "image")
+                                                            .contains(
+                                                            "image")
                                                             ? ClipRRect(
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            8),
-                                                                child: Image
-                                                                    .network(
-                                                                  portfolio
-                                                                      .fileUrl,
-                                                                  fit: BoxFit
-                                                                      .cover,
-                                                                  loadingBuilder:
-                                                                      (context,
-                                                                          child,
-                                                                          loadingProgress) {
-                                                                    if (loadingProgress ==
-                                                                        null) {
-                                                                      return child;
-                                                                    } else {
-                                                                      return Container(
-                                                                        height:
-                                                                            72,
-                                                                        width:
-                                                                            64,
-                                                                        decoration: BoxDecoration(
-                                                                            color:
-                                                                                Colors.grey.shade200,
-                                                                            borderRadius: BorderRadius.circular(10)),
-                                                                        child: Center(
-                                                                            child: Padding(
+                                                            borderRadius:
+                                                            BorderRadius
+                                                                .circular(
+                                                                8),
+                                                            child: Image
+                                                                .network(
+                                                              portfolio
+                                                                  .fileUrl,
+                                                              fit: BoxFit
+                                                                  .cover,
+                                                              loadingBuilder:
+                                                                  (context,
+                                                                  child,
+                                                                  loadingProgress) {
+                                                                if (loadingProgress ==
+                                                                    null) {
+                                                                  return child;
+                                                                } else {
+                                                                  return Container(
+                                                                    height:
+                                                                    72,
+                                                                    width:
+                                                                    64,
+                                                                    decoration: BoxDecoration(
+                                                                        color:
+                                                                        Colors.grey.shade200,
+                                                                        borderRadius: BorderRadius.circular(10)),
+                                                                    child: Center(
+                                                                        child: Padding(
                                                                           padding: const EdgeInsets
                                                                               .all(
                                                                               8.0),
                                                                           child:
-                                                                              CircularProgressIndicator(
+                                                                          CircularProgressIndicator(
                                                                             strokeWidth:
-                                                                                2,
+                                                                            2,
                                                                             color:
-                                                                                colorOrange,
+                                                                            colorOrange,
                                                                           ),
                                                                         )),
-                                                                      );
-                                                                    }
-                                                                  },
-                                                                  height: 72,
-                                                                  width: 64,
-                                                                ))
+                                                                  );
+                                                                }
+                                                              },
+                                                              height: 72,
+                                                              width: 64,
+                                                            ))
                                                             : SizedBox(),
                                                         portfolio.filetype
-                                                                .contains(
-                                                                    "image")
+                                                            .contains(
+                                                            "image")
                                                             ? SizedBox()
                                                             : Center(
-                                                                child: Container(
-                                                                    height: 24,
-                                                                    width: 24,
-                                                                    decoration: BoxDecoration(shape: BoxShape.circle, border: Border.all(color: colorWhite)),
-                                                                    child: Center(
-                                                                        child: Icon(
-                                                                      Icons
-                                                                          .play_arrow,
-                                                                      color:
-                                                                          colorWhite,
-                                                                    ))),
-                                                              )
+                                                          child: Container(
+                                                              height: 24,
+                                                              width: 24,
+                                                              decoration: BoxDecoration(shape: BoxShape.circle, border: Border.all(color: colorWhite)),
+                                                              child: Center(
+                                                                  child: Icon(
+                                                                    Icons
+                                                                        .play_arrow,
+                                                                    color:
+                                                                    colorWhite,
+                                                                  ))),
+                                                        )
                                                       ],
                                                     )),
                                               ),
@@ -1619,7 +1606,7 @@ class _ConsultantsDetailsScreenState extends State<ConsultantsDetailsScreen> {
                                 return Icon(
                                   Icons.arrow_forward_ios,
                                   color:
-                                      const Color(0xff0D0D0D).withOpacity(0.3),
+                                  const Color(0xff0D0D0D).withOpacity(0.3),
                                   size: 12,
                                 );
                               }
@@ -1789,9 +1776,9 @@ class _ConsultantsDetailsScreenState extends State<ConsultantsDetailsScreen> {
                           scrollDirection: Axis.horizontal,
                           itemBuilder: (BuildContext context, int index) {
                             final consultantReviews =
-                                consultantDetailsController
-                                    .userData()
-                                    .reviews[index];
+                            consultantDetailsController
+                                .userData()
+                                .reviews[index];
                             return Padding(
                               padding: const EdgeInsets.only(right: 16.0),
                               child: ReviewsWidgetConsultantDetails(
@@ -1905,14 +1892,14 @@ class ReviewsWidgetConsultantDetails extends StatelessWidget {
                     minRating: 0.0,
                     items: List.generate(
                         5,
-                        (index) => const RatingWidget(
-                              selectedColor: colorOrange,
-                              unSelectedColor: Colors.grey,
-                              child: Icon(
-                                Icons.star,
-                                size: 14,
-                              ),
-                            )),
+                            (index) => const RatingWidget(
+                          selectedColor: colorOrange,
+                          unSelectedColor: Colors.grey,
+                          child: Icon(
+                            Icons.star,
+                            size: 14,
+                          ),
+                        )),
                     onChanged: (value) {},
                   )
                 ],
@@ -1922,7 +1909,7 @@ class ReviewsWidgetConsultantDetails extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 8.0),
               child: Container(
                 constraints:
-                    BoxConstraints(maxWidth: MediaQuery.of(context).size.width),
+                BoxConstraints(maxWidth: MediaQuery.of(context).size.width),
                 child: Text(
                   _stripHtmlTags(consultantReviewModel.review),
                   style: const TextStyle(

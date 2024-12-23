@@ -14,6 +14,7 @@ class AppointmentsController extends GetxController {
   RxList<AppointmentModel> dashboardUpcomingAppointments = <AppointmentModel>[].obs;
   RxList<AppointmentModel> completedAppointments = <AppointmentModel>[].obs;
   RxList<AppointmentModel> cancelledAppointments = <AppointmentModel>[].obs;
+  RxList<AppointmentModel> rejectedAppointments = <AppointmentModel>[].obs;
   RxList<AppointmentModel> waitingAppointments = <AppointmentModel>[].obs;
   RxList<RescheduleRequestAppointmentModel> rescheduledAppointments = <RescheduleRequestAppointmentModel>[].obs;
 
@@ -24,6 +25,7 @@ class AppointmentsController extends GetxController {
     fetchUpcomingAppointments();
     fetchCompletedAppointments();
     fetchCancelledAppointments();
+    fetchRejectedAppointments();
     fetchRescheduledAppointments();
     super.onInit();
   }
@@ -113,8 +115,25 @@ class AppointmentsController extends GetxController {
       String userId = await getToken();
       final consultants = await _appointmentRepository.getAllRescheduleAppointmentRequest(
           userId, "1000", );
-      print('reschedule appointments; $consultants');
+
       rescheduledAppointments.assignAll(consultants);
+      isLoading.value = false;
+
+    } catch (e) {
+      print(e.toString());
+    } finally {
+      isLoading.value = false;
+    }
+  }
+  Future<void> fetchRejectedAppointments() async {
+    try {
+      isLoading.value = true;
+      String userId = await getToken();
+      final consultants = await _appointmentRepository.getAllAppointment(
+        userId, "Reject",
+      );
+
+      rejectedAppointments.assignAll(consultants);
       isLoading.value = false;
 
     } catch (e) {

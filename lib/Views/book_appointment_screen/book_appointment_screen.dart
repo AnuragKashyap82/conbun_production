@@ -15,7 +15,10 @@ class BookAppointmentScreen extends StatefulWidget {
   final bool isLiveBooking;
 
   const BookAppointmentScreen(
-      {super.key, required this.consultantId, required this.consultantToken, required this.isLiveBooking});
+      {super.key,
+      required this.consultantId,
+      required this.consultantToken,
+      required this.isLiveBooking});
 
   @override
   State<BookAppointmentScreen> createState() => _BookAppointmentScreenState();
@@ -29,17 +32,24 @@ class _BookAppointmentScreenState extends State<BookAppointmentScreen> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
-    bookAppointmentApis.clearPackage();
-    packageController.allPackages.clear();
-    packageController.fetchAllPackages(widget.consultantId);
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (mounted) {
+        bookAppointmentApis.clearPackage();
+        packageController.allPackages.clear();
+        packageController.fetchAllPackages(widget.consultantId);
+      }
+    });
   }
+
 
   @override
   void dispose() {
     // TODO: implement dispose
     super.dispose();
+    packageController.dispose();
+    bookAppointmentApis.dispose();
+    packageDurationController.dispose();
   }
 
   @override
@@ -82,10 +92,10 @@ class _BookAppointmentScreenState extends State<BookAppointmentScreen> {
               const Text(
                 "Select Package",
                 style: TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w400,
-                    color: Color(0xff343F52),
-                    fontFamily: "Bold",
+                  fontSize: 14,
+                  fontWeight: FontWeight.w400,
+                  color: Color(0xff343F52),
+                  fontFamily: "Bold",
                 ),
               ),
               const SizedBox(
@@ -145,7 +155,9 @@ class _BookAppointmentScreenState extends State<BookAppointmentScreen> {
                             bookAppointmentApis.currentIndex.value = index;
                             bookAppointmentApis.priceValue.value = "";
                             bookAppointmentApis.selectedDuration.value = "0";
-                            await packageDurationController.fetchPackageDuration(widget.consultantId, consultant.id);
+                            await packageDurationController
+                                .fetchPackageDuration(
+                                    widget.consultantId, consultant.id);
                           },
                           child: AppointmentWidget(
                             color:
@@ -331,10 +343,11 @@ class _BookAppointmentScreenState extends State<BookAppointmentScreen> {
               ),
               GestureDetector(
                 onTap: () {
-                  if(widget.isLiveBooking){
+                  if (widget.isLiveBooking) {
                     showSnackBar('Live Booking', context);
+
                     ///
-                  }else{
+                  } else {
                     if (bookAppointmentApis.selectedDuration.value == "0") {
                       showSnackBar("Select your package and Duration", context);
                     } else {
@@ -342,12 +355,11 @@ class _BookAppointmentScreenState extends State<BookAppointmentScreen> {
                           context,
                           MaterialPageRoute(
                               builder: (_) => BookAppointmentTwoScreen(
-                                consultantId: widget.consultantId,
-                                devicetoken: widget.consultantToken,
-                              )));
+                                    consultantId: widget.consultantId,
+                                    devicetoken: widget.consultantToken,
+                                  )));
                     }
                   }
-
                 },
                 child: Align(
                   alignment: AlignmentDirectional.center,

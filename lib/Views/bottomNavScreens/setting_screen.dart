@@ -1,5 +1,6 @@
 import 'dart:typed_data';
 import 'package:conbun_production/Views/addFeedbackScreen/add_feedback_screen.dart';
+import 'package:conbun_production/Views/balance_screen.dart';
 import 'package:conbun_production/Views/editProfileScreen/edit_profile_screen.dart';
 import 'package:conbun_production/Views/followers_screen.dart';
 import 'package:conbun_production/Views/help_center/help_center.dart';
@@ -12,7 +13,9 @@ import 'package:image_picker/image_picker.dart';
 import 'package:shimmer_effect/shimmer_effect.dart';
 import '../../Controllers/user_controller.dart';
 import '../PoliciesScreen/privacy_policy_screen.dart';
+import '../PoliciesScreen/security_screen.dart';
 import '../editProfileScreen/edit_profile_apis.dart';
+import '../transactionHistoryScreen/transaction_history_screen.dart';
 import 'bottomNavScreen.dart';
 
 class SettingScreen extends StatefulWidget {
@@ -219,55 +222,55 @@ class _SettingScreenState extends State<SettingScreen> {
                 height: 200,
                 child: Stack(
                   children: [
-                    // Positioned(
-                    //   bottom: 0,
-                    //   right: 0,
-                    //   left: 0,
-                    //   child: Container(
-                    //     height: 72,
-                    //     decoration:
-                    //     BoxDecoration(color: colorViolet.withOpacity(0.2)),
-                    //     child: Row(
-                    //       mainAxisAlignment: MainAxisAlignment.center,
-                    //       crossAxisAlignment: CrossAxisAlignment.center,
-                    //       children: [
-                    //         SizedBox(
-                    //           width: 80,
-                    //         ),
-                    //         GestureDetector(
-                    //           onTap: () {
-                    //             Navigator.push(
-                    //                 context,
-                    //                 MaterialPageRoute(
-                    //                     builder: (_) => BalanceScreen()));
-                    //           },
-                    //           child: SvgPicture.asset(
-                    //             'assets/svg/wallet.svg',
-                    //             width: 18,
-                    //             height: 18,
-                    //             color: colorViolet,
-                    //           ),
-                    //         ),
-                    //         SizedBox(
-                    //           width: 16,
-                    //         ),
-                    //         Obx((){
-                    //           if(userController.isLoading.value){
-                    //             return SizedBox();
-                    //           }
-                    //           return Text(
-                    //             "₹${double.parse(userController.userWalletBalance.value ?? '0.0').toStringAsFixed(2)}",
-                    //             style: TextStyle(
-                    //                 fontSize: 16,
-                    //                 fontWeight: FontWeight.w800,
-                    //                 color: Color(0xff676f81),
-                    //                 fontFamily: "Bold"),
-                    //           );
-                    //         })
-                    //       ],
-                    //     ),
-                    //   ),
-                    // ),
+                    Positioned(
+                      bottom: 0,
+                      right: 0,
+                      left: 0,
+                      child: Container(
+                        height: 72,
+                        decoration:
+                        BoxDecoration(color: colorViolet.withOpacity(0.2)),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            SizedBox(
+                              width: 80,
+                            ),
+                            GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (_) => BalanceScreen()));
+                              },
+                              child: SvgPicture.asset(
+                                'assets/svg/wallet.svg',
+                                width: 18,
+                                height: 18,
+                                color: colorViolet,
+                              ),
+                            ),
+                            SizedBox(
+                              width: 16,
+                            ),
+                            Obx((){
+                              if(userController.isLoading.value){
+                                return SizedBox();
+                              }
+                              return Text(
+                                "₹${double.parse(userController.userWalletBalance.value ?? '0.0').toStringAsFixed(2)}",
+                                style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w800,
+                                    color: Color(0xff676f81),
+                                    fontFamily: "Bold"),
+                              );
+                            })
+                          ],
+                        ),
+                      ),
+                    ),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 16.0),
                       child: Column(
@@ -567,18 +570,18 @@ class _SettingScreenState extends State<SettingScreen> {
                         svgName: 'user-regular',
                       ),
                     ),
-                    // GestureDetector(
-                    //   onTap: () {
-                    //     Navigator.push(
-                    //         context,
-                    //         MaterialPageRoute(
-                    //             builder: (_) => TransactionHistoryScreen()));
-                    //   },
-                    //   child: SettingItems(
-                    //     title: 'Transaction History',
-                    //     svgName: 'transaction',
-                    //   ),
-                    // ),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (_) => TransactionHistoryScreen()));
+                      },
+                      child: SettingItems(
+                        title: 'Transaction History',
+                        svgName: 'transaction',
+                      ),
+                    ),
                     // Divider(
                     //   color: Color(0xffE3E3E3),
                     // ),
@@ -628,16 +631,16 @@ class _SettingScreenState extends State<SettingScreen> {
                         svgName: 'lock-alt-svgrepo-com',
                       ),
                     ),
-                    // GestureDetector(
-                    //   onTap: () {
-                    //     Navigator.push(context,
-                    //         MaterialPageRoute(builder: (_) => SecurityScreen()));
-                    //   },
-                    //   child: SupportItems(
-                    //     title: 'Security',
-                    //     svgName: 'security',
-                    //   ),
-                    // ),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (_) => SecurityScreen()));
+                      },
+                      child: SupportItems(
+                        title: 'Security',
+                        svgName: 'security',
+                      ),
+                    ),
                     GestureDetector(
                       onTap: () {
                         Navigator.push(

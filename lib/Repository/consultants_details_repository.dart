@@ -36,9 +36,11 @@ class ConsultantsDetailsRepository extends GetxController {
         return ConsultantsDetailsModel.fromJson(userData);
 
       } else {
+        return ConsultantsDetailsModel.empty();
         throw "Failed to load featuredConsultants Json: ${response.body}";
       }
     } catch (e) {
+      return ConsultantsDetailsModel.empty();
       throw "Something went wrong: $e";
     }
   }

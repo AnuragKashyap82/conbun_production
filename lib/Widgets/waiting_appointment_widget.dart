@@ -6,13 +6,9 @@ import 'package:conbun_production/Views/bottomNavScreens/dashboardScreen/dashboa
 import 'package:conbun_production/Views/rescheduleAppointmentScreen/reschedule_appointment_apis.dart';
 import 'package:conbun_production/utils/colors.dart';
 import 'package:conbun_production/utils/global_variables.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-
 import '../Views/appointmentDetailsScreen/appointment_details_apis.dart';
 import '../Views/rescheduleAppointmentScreen/reschedule_screen_two.dart';
 
@@ -218,7 +214,6 @@ class _WaitingAppointentWidgetState extends State<WaitingAppointentWidget> {
                 SizedBox(
                   width: 20,
                 ),
-                widget.isMoreButton?
                 PopupMenuButton<int>(
                     padding: EdgeInsets.zero,
                     shadowColor: colorWhite,
@@ -227,12 +222,12 @@ class _WaitingAppointentWidgetState extends State<WaitingAppointentWidget> {
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(8)),
                     itemBuilder: (context) => [
-                          PopupMenuItem<int>(
-                              padding: EdgeInsets.zero,
-                              onTap: () {
-                                Future.delayed(
-                                    Duration.zero,
-                                () =>
+                      PopupMenuItem<int>(
+                          padding: EdgeInsets.zero,
+                          onTap: () {
+                            Future.delayed(
+                                Duration.zero,
+                                    () =>
                                     showModalBottomSheet(
                                       context: context,
                                       backgroundColor: Colors.transparent,
@@ -331,11 +326,9 @@ class _WaitingAppointentWidgetState extends State<WaitingAppointentWidget> {
                                                           Navigator.pop(context);
                                                           await appointmentsController
                                                               .fetchUpcomingAppointments();
-                                                          showSnackBar(userController.userData().id, context);
-                                                          showSnackBar(widget.appointmentModel.id, context);
                                                           showSnackBar(response['message'], context);
 
-                                                          },
+                                                        },
                                                         child: Container(
                                                           height: 40,
                                                           width:
@@ -374,64 +367,14 @@ class _WaitingAppointentWidgetState extends State<WaitingAppointentWidget> {
                                         );
                                       },
                                     )
-                                );
-
-                              },
-                              child: Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 8.0),
-                                child: Text(
-                                  "Cancel Event",
-                                  textAlign: TextAlign.start,
-                                  style: TextStyle(
-                                    fontFamily: "Bold",
-                                    fontSize: 12,
-                                    color: Color(0xff737B8B),
-                                  ),
-                                ),
-                              )),
-                          PopupMenuItem<int>(
-                              padding: EdgeInsets.zero,
-                              onTap: () async{
-                                rescheduleAppointmentApis.rescheduleAppointModel.value = widget.appointmentModel;
-                                widget.changeScreenFunction();
-                              },
-                              child: Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 8.0),
-                                child: Text(
-                                  "Rescheduled Event",
-                                  textAlign: TextAlign.start,
-                                  style: TextStyle(
-                                    fontFamily: "Bold",
-                                    fontSize: 12,
-                                    color: Color(0xff737B8B),
-                                  ),
-                                ),
-                              )),
-                        ],
-                    child: Icon(
-                      Icons.more_vert,
-                      color: Color(0xffCDCDCD),
-                    )):PopupMenuButton<int>
-                  (
-                    padding: EdgeInsets.zero,
-                    shadowColor: colorWhite,
-                    surfaceTintColor: colorWhite,
-                    color: colorWhite,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8)),
-                    itemBuilder: (context) => [
-                      PopupMenuItem<int>(
-                          padding: EdgeInsets.zero,
-                          onTap: () async{
+                            );
 
                           },
                           child: Padding(
                             padding:
                             const EdgeInsets.symmetric(horizontal: 8.0),
                             child: Text(
-                              "WAITING",
+                              "Cancel Event",
                               textAlign: TextAlign.start,
                               style: TextStyle(
                                 fontFamily: "Bold",

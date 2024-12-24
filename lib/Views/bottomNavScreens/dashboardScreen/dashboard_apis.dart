@@ -31,6 +31,7 @@ class DashboardApis extends GetxController {
     final requestBody = {
       'userid': userId,
       'appointmentid': appointmentId,
+      'cancelled_by': 'User',
     };
     final String requestBodyJson = jsonEncode(requestBody);
 

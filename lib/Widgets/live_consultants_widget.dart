@@ -1,5 +1,4 @@
 import 'package:conbun_production/Controllers/user_controller.dart';
-import 'package:conbun_production/Models/consultants_model.dart';
 import 'package:conbun_production/Models/live_consultant_model.dart';
 import 'package:conbun_production/Widgets/live_filter_bottom_sheet.dart';
 import 'package:flutter/material.dart';

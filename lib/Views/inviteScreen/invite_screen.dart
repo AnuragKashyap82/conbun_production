@@ -53,590 +53,628 @@ class _InviteScreenState extends State<InviteScreen> {
           ),
         ),
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Container(
-              color: Colors.black.withOpacity(0.95),
-              width: MediaQuery.of(context).size.width,
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 26.0),
+      body: RefreshIndicator(
+        onRefresh: ()async{
+          await inviteController.fetchAllInvites();
+        },
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                color: Colors.black.withOpacity(0.95),
+                width: MediaQuery.of(context).size.width,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 26.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(
+                        height: 16,
+                      ),
+                      Center(
+                          child: Image.asset(
+                        "assets/images/referearn.png",
+                        fit: BoxFit.fill,
+                        height: 80,
+                        width: 120,
+                      )),
+                      SizedBox(
+                        height: 8,
+                      ),
+                      Text(
+                        "Invite your Friends and earn upto ₹200 per user",
+                        style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.w800,
+                            color: colorWhite,
+                            fontFamily: "Bold"),
+                        textAlign: TextAlign.center,
+                      ),
+                      SizedBox(
+                        height: 16,
+                      ),
+                      Container(
+                        height: 38,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(2),
+                            color: colorWhite),
+                        child: DottedBorder(
+                          color: Color(0xffE7E7E7),
+                          strokeWidth: 2,
+                          borderType: BorderType.RRect,
+                          radius: Radius.circular(6),
+                          dashPattern: [6],
+                          child: Center(
+                            child: Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 16.0),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Obx(() {
+                                    if (inviteController.isLoading.value) {
+                                      return Text(
+                                        '',
+                                        style: TextStyle(
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w900,
+                                            color: onBoardingTextColor,
+                                            fontFamily: "Bold"),
+                                      );
+                                    } else {
+                                      return Text(
+                                        inviteController
+                                                .refrelData()!
+                                                .referralCode
+                                                .toString() ??
+                                            '',
+                                        style: TextStyle(
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w900,
+                                            color: onBoardingTextColor,
+                                            fontFamily: "Bold"),
+                                      );
+                                    }
+                                  }),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        "Copy",
+                                        style: TextStyle(
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w800,
+                                            color: onBoardingTextColor,
+                                            fontFamily: "Bold"),
+                                      ),
+                                      IconButton(
+                                        icon: Icon(Icons.copy, color: colorBlack, size: 16,) ,
+                                        onPressed: (){
+                                          Clipboard.setData(ClipboardData(text: inviteController
+                                              .refrelData()!
+                                              .referralCode
+                                              .toString()));
+                                          showSnackBar('Copied ${inviteController
+                                              .refrelData()!
+                                              .referralCode
+                                              .toString()}', context);
+                                        },
+                                      )
+                                    ],
+                                  )
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 42,
+                      )
+                    ],
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 16,
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16.0),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    SizedBox(
-                      height: 16,
-                    ),
-                    Center(
-                        child: Image.asset(
-                      "assets/images/referearn.png",
-                      fit: BoxFit.fill,
-                      height: 80,
-                      width: 120,
-                    )),
-                    SizedBox(
-                      height: 8,
-                    ),
                     Text(
-                      "Invite your Friends and earn upto ₹200 per user",
+                      "How does it work??",
                       style: TextStyle(
-                          fontSize: 20,
+                          fontSize: 16,
                           fontWeight: FontWeight.w800,
-                          color: colorWhite,
-                          fontFamily: "Bold"),
+                          color: colorSecondaryViolet,
+                          fontFamily: "SemiBold"),
                       textAlign: TextAlign.center,
                     ),
                     SizedBox(
                       height: 16,
                     ),
                     Container(
-                      height: 38,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(2),
-                          color: colorWhite),
-                      child: DottedBorder(
-                        color: Color(0xffE7E7E7),
-                        strokeWidth: 2,
-                        borderType: BorderType.RRect,
-                        radius: Radius.circular(6),
-                        dashPattern: [6],
-                        child: Center(
-                          child: Padding(
-                            padding:
-                                const EdgeInsets.symmetric(horizontal: 16.0),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Obx(() {
-                                  if (inviteController.isLoading.value) {
-                                    return Text(
-                                      '',
-                                      style: TextStyle(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w900,
-                                          color: onBoardingTextColor,
-                                          fontFamily: "Bold"),
-                                    );
-                                  } else {
-                                    return Text(
-                                      inviteController
-                                              .refrelData()!
-                                              .referralCode
-                                              .toString() ??
-                                          '',
-                                      style: TextStyle(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w900,
-                                          color: onBoardingTextColor,
-                                          fontFamily: "Bold"),
-                                    );
-                                  }
-                                }),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.end,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    Text(
-                                      "Copy",
-                                      style: TextStyle(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w800,
-                                          color: onBoardingTextColor,
-                                          fontFamily: "Bold"),
-                                    ),
-                                    IconButton(
-                                      icon: Icon(Icons.copy, color: colorBlack, size: 16,) ,
-                                      onPressed: (){
-                                        Clipboard.setData(ClipboardData(text: inviteController
-                                            .refrelData()!
-                                            .referralCode
-                                            .toString()));
-                                        showSnackBar('Copied ${inviteController
-                                            .refrelData()!
-                                            .referralCode
-                                            .toString()}', context);
-                                      },
-                                    )
-                                  ],
-                                )
-                              ],
+                      height: 138,
+                      width: MediaQuery.of(context).size.width,
+                      decoration:
+                          BoxDecoration(borderRadius: BorderRadius.circular(5)),
+                      child: ClipRRect(
+                          borderRadius: BorderRadius.circular(5),
+                          child: Image.asset(
+                            "assets/images/youtube.png",
+                            fit: BoxFit.cover,
+                          )),
+                    ),
+                    SizedBox(
+                      height: 16,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Container(
+                          height: 20,
+                          width: 20,
+                          decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              border: Border.all(color: colorBlack)),
+                          child: Center(
+                            child: Text(
+                              "1",
+                              style: TextStyle(
+                                  fontSize: 10,
+                                  fontWeight: FontWeight.w200,
+                                  color: colorSecondaryViolet,
+                                  fontFamily: "SemiBold"),
+                              textAlign: TextAlign.center,
                             ),
                           ),
                         ),
-                      ),
+                        SizedBox(
+                          width: 12,
+                        ),
+                        Text(
+                          "Invite your friends to Conbun",
+                          style: TextStyle(
+                              fontSize: 12,
+                              fontWeight: FontWeight.w500,
+                              color: colorSecondaryViolet,
+                              fontFamily: "Bold"),
+                          textAlign: TextAlign.center,
+                        ),
+                      ],
                     ),
                     SizedBox(
-                      height: 42,
-                    )
+                      height: 8,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Container(
+                          height: 20,
+                          width: 20,
+                          decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              border: Border.all(color: colorBlack)),
+                          child: Center(
+                            child: Text(
+                              "2",
+                              style: TextStyle(
+                                  fontSize: 10,
+                                  fontWeight: FontWeight.w200,
+                                  color: colorSecondaryViolet,
+                                  fontFamily: "SemiBold"),
+                              textAlign: TextAlign.center,
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          width: 12,
+                        ),
+                        Expanded(
+                          child: Text(
+                            "You earn 1% fund share every time your friends",
+                            style: TextStyle(
+                                fontSize: 12,
+                                fontWeight: FontWeight.w500,
+                                color: colorSecondaryViolet,
+                                fontFamily: "Bold"),
+                            textAlign: TextAlign.start,
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 8,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Container(
+                          height: 20,
+                          width: 20,
+                          decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              border: Border.all(color: colorBlack)),
+                          child: Center(
+                            child: Text(
+                              "3",
+                              style: TextStyle(
+                                  fontSize: 10,
+                                  fontWeight: FontWeight.w200,
+                                  color: colorSecondaryViolet,
+                                  fontFamily: "SemiBold"),
+                              textAlign: TextAlign.center,
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          width: 12,
+                        ),
+                        Text(
+                          "Earn upto ₹200 per invite",
+                          style: TextStyle(
+                              fontSize: 12,
+                              fontWeight: FontWeight.w500,
+                              color: colorSecondaryViolet,
+                              fontFamily: "Bold"),
+                          textAlign: TextAlign.center,
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 16,
+                    ),
+                    Text(
+                      "Rules",
+                      style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w800,
+                          color: colorSecondaryViolet,
+                          fontFamily: "SemiBold"),
+                      textAlign: TextAlign.center,
+                    ),
+                    SizedBox(
+                      height: 16,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Container(
+                          height: 20,
+                          width: 20,
+                          decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              border: Border.all(color: colorBlack)),
+                          child: Center(
+                            child: Text(
+                              "1",
+                              style: TextStyle(
+                                  fontSize: 10,
+                                  fontWeight: FontWeight.w200,
+                                  color: colorSecondaryViolet,
+                                  fontFamily: "SemiBold"),
+                              textAlign: TextAlign.center,
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          width: 12,
+                        ),
+                        Expanded(
+                          child: Text(
+                            "Invite your friends to Conbun Invite your friends to Conbun Invite your friends to Conbun Invite your friends to Conbun",
+                            style: TextStyle(
+                                fontSize: 12,
+                                fontWeight: FontWeight.w500,
+                                color: colorSecondaryViolet,
+                                fontFamily: "Bold"),
+                            textAlign: TextAlign.start,
+                            maxLines: 3,
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 8,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Container(
+                          height: 20,
+                          width: 20,
+                          decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              border: Border.all(color: colorBlack)),
+                          child: Center(
+                            child: Text(
+                              "2",
+                              style: TextStyle(
+                                  fontSize: 10,
+                                  fontWeight: FontWeight.w200,
+                                  color: colorSecondaryViolet,
+                                  fontFamily: "SemiBold"),
+                              textAlign: TextAlign.center,
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          width: 12,
+                        ),
+                        Expanded(
+                          child: Text(
+                            "Invite your friends to Conbun Invite your friends to Conbun Invite your friends to Conbun Invite your friends to Conbun",
+                            style: TextStyle(
+                                fontSize: 12,
+                                fontWeight: FontWeight.w500,
+                                color: colorSecondaryViolet,
+                                fontFamily: "Bold"),
+                            textAlign: TextAlign.start,
+                            maxLines: 3,
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 16,
+                    ),
+                    Text(
+                      "Your Invite Status",
+                      style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w800,
+                          color: colorSecondaryViolet,
+                          fontFamily: "SemiBold"),
+                      textAlign: TextAlign.center,
+                    ),
+                    SizedBox(
+                      height: 16,
+                    ),
+                    Obx(() {
+                      if (inviteController.isLoading.value) {
+                        return Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                          child: SingleChildScrollView(
+                            child: Column(
+                              children: [
+                                ShimmerEffect(
+                                  baseColor: Colors.grey.shade300,
+                                  highlightColor: Colors.grey.shade100,
+                                  child: Container(
+                                    width: MediaQuery.of(context).size.width,
+                                    decoration: BoxDecoration(
+                                        color: Colors.green,
+                                        borderRadius: BorderRadius.circular(10)),
+                                    height: 72,
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 16,
+                                ),
+                                ShimmerEffect(
+                                    baseColor: Colors.grey.shade300,
+                                    highlightColor: Colors.grey.shade100,
+                                    child: Container(
+                                      width: MediaQuery.of(context).size.width,
+                                      decoration: BoxDecoration(
+                                          color: Colors.green,
+                                          borderRadius:
+                                              BorderRadius.circular(10)),
+                                      height: 72,
+                                    )),
+                                SizedBox(
+                                  height: 16,
+                                ),
+                                ShimmerEffect(
+                                    baseColor: Colors.grey.shade300,
+                                    highlightColor: Colors.grey.shade100,
+                                    child: Container(
+                                      width: MediaQuery.of(context).size.width,
+                                      decoration: BoxDecoration(
+                                          color: Colors.green,
+                                          borderRadius:
+                                              BorderRadius.circular(10)),
+                                      height: 72,
+                                    )),
+                                SizedBox(
+                                  height: 16,
+                                ),
+                                ShimmerEffect(
+                                    baseColor: Colors.grey.shade300,
+                                    highlightColor: Colors.grey.shade100,
+                                    child: Container(
+                                      width: MediaQuery.of(context).size.width,
+                                      decoration: BoxDecoration(
+                                          color: Colors.green,
+                                          borderRadius:
+                                              BorderRadius.circular(10)),
+                                      height: 72,
+                                    )),
+                                SizedBox(
+                                  height: 16,
+                                ),
+                                ShimmerEffect(
+                                    baseColor: Colors.grey.shade300,
+                                    highlightColor: Colors.grey.shade100,
+                                    child: Container(
+                                      width: MediaQuery.of(context).size.width,
+                                      decoration: BoxDecoration(
+                                          color: Colors.green,
+                                          borderRadius:
+                                              BorderRadius.circular(10)),
+                                      height: 72,
+                                    )),
+                                SizedBox(
+                                  height: 16,
+                                ),
+                              ],
+                            ),
+                          ),
+                        );
+                      }
+                      if (inviteController.refrelData()!.invites.isEmpty) {
+                        return Center(
+                          child: Text("No Invites"),
+                        );
+                      }
+                      return ListView.builder(
+                        itemCount: inviteController.refrelData()!.invites.length,
+                        shrinkWrap: true,
+                        primary: false,
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemBuilder: (BuildContext context, int index) {
+                          final invites =
+                              inviteController.refrelData()!.invites[index];
+                          return Container(
+                            decoration: BoxDecoration(
+                                color: Color(0xffF8F8F8),
+                                borderRadius: BorderRadius.circular(8)),
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 16.0, vertical: 16),
+                              child: Center(
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    ClipRRect(
+                                      borderRadius: BorderRadius.circular(100),
+                                      child: Container(
+                                          height: 34,
+                                          width: 34,
+                                          decoration: BoxDecoration(
+                                              color: colorWhite,
+                                              shape: BoxShape.circle),
+                                          child: invites.profileImage != null
+                                              ? Image.network(invites.profileImage!, fit: BoxFit.cover,)
+                                              : Icon(
+                                                  Icons.person,
+                                                  color: colorOrange,
+                                                )),
+                                    ),
+                                    SizedBox(
+                                      width: 16,
+                                    ),
+                                    Expanded(
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            invites.name,
+                                            style: TextStyle(
+                                              fontSize: 12,
+                                              fontWeight: FontWeight.w200,
+                                              fontFamily: "SemiBold",
+                                              color: Color(0xff697182),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    Text(
+                                      '₹${invites.amount}',
+                                      style: TextStyle(
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w800,
+                                        fontFamily: "Bold",
+                                        color: Color(0xff697182),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          );
+                        },
+                      );
+                    }),
                   ],
                 ),
               ),
-            ),
-            SizedBox(
-              height: 16,
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "How does it work??",
-                    style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w800,
-                        color: colorSecondaryViolet,
-                        fontFamily: "SemiBold"),
-                    textAlign: TextAlign.center,
-                  ),
-                  SizedBox(
-                    height: 16,
-                  ),
-                  Container(
-                    height: 138,
-                    width: MediaQuery.of(context).size.width,
-                    decoration:
-                        BoxDecoration(borderRadius: BorderRadius.circular(5)),
-                    child: ClipRRect(
-                        borderRadius: BorderRadius.circular(5),
-                        child: Image.asset(
-                          "assets/images/youtube.png",
-                          fit: BoxFit.cover,
-                        )),
-                  ),
-                  SizedBox(
-                    height: 16,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Container(
-                        height: 20,
-                        width: 20,
-                        decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            border: Border.all(color: colorBlack)),
-                        child: Center(
-                          child: Text(
-                            "1",
-                            style: TextStyle(
-                                fontSize: 10,
-                                fontWeight: FontWeight.w200,
-                                color: colorSecondaryViolet,
-                                fontFamily: "SemiBold"),
-                            textAlign: TextAlign.center,
-                          ),
+              SizedBox(
+                height: 42,
+              ),
+              Container(
+                height: MediaQuery.of(context).size.height * 0.15,
+                width: MediaQuery.of(context).size.width,
+                decoration: BoxDecoration(
+                    color: colorWhite,
+                    borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(36),
+                        topRight: Radius.circular(36))),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    SizedBox(
+                      height: 36,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        SizedBox(
+                          width: 8,
                         ),
-                      ),
-                      SizedBox(
-                        width: 12,
-                      ),
-                      Text(
-                        "Invite your friends to Conbun",
-                        style: TextStyle(
-                            fontSize: 12,
-                            fontWeight: FontWeight.w500,
-                            color: colorSecondaryViolet,
-                            fontFamily: "Bold"),
-                        textAlign: TextAlign.center,
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 8,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Container(
-                        height: 20,
-                        width: 20,
-                        decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            border: Border.all(color: colorBlack)),
-                        child: Center(
-                          child: Text(
-                            "2",
-                            style: TextStyle(
-                                fontSize: 10,
-                                fontWeight: FontWeight.w200,
-                                color: colorSecondaryViolet,
-                                fontFamily: "SemiBold"),
-                            textAlign: TextAlign.center,
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        width: 12,
-                      ),
-                      Expanded(
-                        child: Text(
-                          "You earn 1% fund share every time your friends",
-                          style: TextStyle(
-                              fontSize: 12,
-                              fontWeight: FontWeight.w500,
-                              color: colorSecondaryViolet,
-                              fontFamily: "Bold"),
-                          textAlign: TextAlign.start,
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 8,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Container(
-                        height: 20,
-                        width: 20,
-                        decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            border: Border.all(color: colorBlack)),
-                        child: Center(
-                          child: Text(
-                            "3",
-                            style: TextStyle(
-                                fontSize: 10,
-                                fontWeight: FontWeight.w200,
-                                color: colorSecondaryViolet,
-                                fontFamily: "SemiBold"),
-                            textAlign: TextAlign.center,
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        width: 12,
-                      ),
-                      Text(
-                        "Earn upto ₹200 per invite",
-                        style: TextStyle(
-                            fontSize: 12,
-                            fontWeight: FontWeight.w500,
-                            color: colorSecondaryViolet,
-                            fontFamily: "Bold"),
-                        textAlign: TextAlign.center,
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 16,
-                  ),
-                  Text(
-                    "Rules",
-                    style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w800,
-                        color: colorSecondaryViolet,
-                        fontFamily: "SemiBold"),
-                    textAlign: TextAlign.center,
-                  ),
-                  SizedBox(
-                    height: 16,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Container(
-                        height: 20,
-                        width: 20,
-                        decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            border: Border.all(color: colorBlack)),
-                        child: Center(
-                          child: Text(
-                            "1",
-                            style: TextStyle(
-                                fontSize: 10,
-                                fontWeight: FontWeight.w200,
-                                color: colorSecondaryViolet,
-                                fontFamily: "SemiBold"),
-                            textAlign: TextAlign.center,
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        width: 12,
-                      ),
-                      Expanded(
-                        child: Text(
-                          "Invite your friends to Conbun Invite your friends to Conbun Invite your friends to Conbun Invite your friends to Conbun",
-                          style: TextStyle(
-                              fontSize: 12,
-                              fontWeight: FontWeight.w500,
-                              color: colorSecondaryViolet,
-                              fontFamily: "Bold"),
-                          textAlign: TextAlign.start,
-                          maxLines: 3,
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 8,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Container(
-                        height: 20,
-                        width: 20,
-                        decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            border: Border.all(color: colorBlack)),
-                        child: Center(
-                          child: Text(
-                            "2",
-                            style: TextStyle(
-                                fontSize: 10,
-                                fontWeight: FontWeight.w200,
-                                color: colorSecondaryViolet,
-                                fontFamily: "SemiBold"),
-                            textAlign: TextAlign.center,
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        width: 12,
-                      ),
-                      Expanded(
-                        child: Text(
-                          "Invite your friends to Conbun Invite your friends to Conbun Invite your friends to Conbun Invite your friends to Conbun",
-                          style: TextStyle(
-                              fontSize: 12,
-                              fontWeight: FontWeight.w500,
-                              color: colorSecondaryViolet,
-                              fontFamily: "Bold"),
-                          textAlign: TextAlign.start,
-                          maxLines: 3,
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 16,
-                  ),
-                  Text(
-                    "Your Invite Status",
-                    style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w800,
-                        color: colorSecondaryViolet,
-                        fontFamily: "SemiBold"),
-                    textAlign: TextAlign.center,
-                  ),
-                  SizedBox(
-                    height: 16,
-                  ),
-                  Obx(() {
-                    if (inviteController.isLoading.value) {
-                      return Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 12.0),
-                        child: SingleChildScrollView(
-                          child: Column(
-                            children: [
-                              ShimmerEffect(
-                                baseColor: Colors.grey.shade300,
-                                highlightColor: Colors.grey.shade100,
-                                child: Container(
-                                  width: MediaQuery.of(context).size.width,
-                                  decoration: BoxDecoration(
-                                      color: Colors.green,
-                                      borderRadius: BorderRadius.circular(10)),
-                                  height: 72,
-                                ),
-                              ),
-                              SizedBox(
-                                height: 16,
-                              ),
-                              ShimmerEffect(
-                                  baseColor: Colors.grey.shade300,
-                                  highlightColor: Colors.grey.shade100,
-                                  child: Container(
-                                    width: MediaQuery.of(context).size.width,
-                                    decoration: BoxDecoration(
-                                        color: Colors.green,
-                                        borderRadius:
-                                            BorderRadius.circular(10)),
-                                    height: 72,
-                                  )),
-                              SizedBox(
-                                height: 16,
-                              ),
-                              ShimmerEffect(
-                                  baseColor: Colors.grey.shade300,
-                                  highlightColor: Colors.grey.shade100,
-                                  child: Container(
-                                    width: MediaQuery.of(context).size.width,
-                                    decoration: BoxDecoration(
-                                        color: Colors.green,
-                                        borderRadius:
-                                            BorderRadius.circular(10)),
-                                    height: 72,
-                                  )),
-                              SizedBox(
-                                height: 16,
-                              ),
-                              ShimmerEffect(
-                                  baseColor: Colors.grey.shade300,
-                                  highlightColor: Colors.grey.shade100,
-                                  child: Container(
-                                    width: MediaQuery.of(context).size.width,
-                                    decoration: BoxDecoration(
-                                        color: Colors.green,
-                                        borderRadius:
-                                            BorderRadius.circular(10)),
-                                    height: 72,
-                                  )),
-                              SizedBox(
-                                height: 16,
-                              ),
-                              ShimmerEffect(
-                                  baseColor: Colors.grey.shade300,
-                                  highlightColor: Colors.grey.shade100,
-                                  child: Container(
-                                    width: MediaQuery.of(context).size.width,
-                                    decoration: BoxDecoration(
-                                        color: Colors.green,
-                                        borderRadius:
-                                            BorderRadius.circular(10)),
-                                    height: 72,
-                                  )),
-                              SizedBox(
-                                height: 16,
-                              ),
-                            ],
-                          ),
-                        ),
-                      );
-                    }
-                    if (inviteController.refrelData()!.invites.isEmpty) {
-                      return Center(
-                        child: Text("No Invites"),
-                      );
-                    }
-                    return ListView.builder(
-                      itemCount: inviteController.refrelData()!.invites.length,
-                      shrinkWrap: true,
-                      primary: false,
-                      physics: const NeverScrollableScrollPhysics(),
-                      itemBuilder: (BuildContext context, int index) {
-                        final invites =
-                            inviteController.refrelData()!.invites[index];
-                        return Container(
-                          decoration: BoxDecoration(
-                              color: Color(0xffF8F8F8),
-                              borderRadius: BorderRadius.circular(8)),
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 16.0, vertical: 16),
+                        GestureDetector(
+                          onTap: () {},
+                          child: Container(
+                            height: 48,
+                            width: MediaQuery.of(context).size.width * 0.37,
+                            decoration: BoxDecoration(
+                                color: colorBlack,
+                                borderRadius: BorderRadius.circular(4)),
                             child: Center(
                               child: Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.center,
                                 crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisSize: MainAxisSize.min,
                                 children: [
-                                  ClipRRect(
-                                    borderRadius: BorderRadius.circular(100),
-                                    child: Container(
-                                        height: 34,
-                                        width: 34,
-                                        decoration: BoxDecoration(
-                                            color: colorWhite,
-                                            shape: BoxShape.circle),
-                                        child: invites.profileImage != null
-                                            ? Image.network(invites.profileImage!, fit: BoxFit.cover,)
-                                            : Icon(
-                                                Icons.person,
-                                                color: colorOrange,
-                                              )),
+                                  Text(
+                                    "Invite Now",
+                                    style: TextStyle(
+                                        fontSize: 13,
+                                        fontWeight: FontWeight.w200,
+                                        color: colorWhite,
+                                        fontFamily: "SemiBold"),
                                   ),
                                   SizedBox(
-                                    width: 16,
+                                    width: 8,
                                   ),
-                                  Expanded(
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          invites.name,
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                            fontWeight: FontWeight.w200,
-                                            fontFamily: "SemiBold",
-                                            color: Color(0xff697182),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  Text(
-                                    '₹${invites.amount}',
-                                    style: TextStyle(
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.w800,
-                                      fontFamily: "Bold",
-                                      color: Color(0xff697182),
-                                    ),
-                                  ),
+                                  Icon(
+                                    Icons.access_time,
+                                    color: colorWhite,
+                                    size: 13,
+                                  )
                                 ],
                               ),
                             ),
                           ),
-                        );
-                      },
-                    );
-                  }),
-                ],
-              ),
-            ),
-            SizedBox(
-              height: 42,
-            ),
-            Container(
-              height: MediaQuery.of(context).size.height * 0.15,
-              width: MediaQuery.of(context).size.width,
-              decoration: BoxDecoration(
-                  color: colorWhite,
-                  borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(36),
-                      topRight: Radius.circular(36))),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  SizedBox(
-                    height: 36,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      SizedBox(
-                        width: 8,
-                      ),
-                      GestureDetector(
-                        onTap: () {},
-                        child: Container(
+                        ),
+                        Container(
                           height: 48,
                           width: MediaQuery.of(context).size.width * 0.37,
                           decoration: BoxDecoration(
-                              color: colorBlack,
+                              color: colorWhite,
+                              border: Border.all(color: Color(0xff636363)),
                               borderRadius: BorderRadius.circular(4)),
                           child: Center(
                             child: Row(
@@ -645,68 +683,35 @@ class _InviteScreenState extends State<InviteScreen> {
                               mainAxisSize: MainAxisSize.min,
                               children: [
                                 Text(
-                                  "Invite Now",
+                                  "Other Options",
                                   style: TextStyle(
                                       fontSize: 13,
-                                      fontWeight: FontWeight.w200,
-                                      color: colorWhite,
+                                      fontWeight: FontWeight.w600,
+                                      color: colorBlack,
                                       fontFamily: "SemiBold"),
                                 ),
                                 SizedBox(
                                   width: 8,
                                 ),
                                 Icon(
-                                  Icons.access_time,
-                                  color: colorWhite,
-                                  size: 13,
+                                  Icons.share_outlined,
+                                  color: colorBlack,
+                                  size: 16,
                                 )
                               ],
                             ),
                           ),
                         ),
-                      ),
-                      Container(
-                        height: 48,
-                        width: MediaQuery.of(context).size.width * 0.37,
-                        decoration: BoxDecoration(
-                            color: colorWhite,
-                            border: Border.all(color: Color(0xff636363)),
-                            borderRadius: BorderRadius.circular(4)),
-                        child: Center(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Text(
-                                "Other Options",
-                                style: TextStyle(
-                                    fontSize: 13,
-                                    fontWeight: FontWeight.w600,
-                                    color: colorBlack,
-                                    fontFamily: "SemiBold"),
-                              ),
-                              SizedBox(
-                                width: 8,
-                              ),
-                              Icon(
-                                Icons.share_outlined,
-                                color: colorBlack,
-                                size: 16,
-                              )
-                            ],
-                          ),
+                        SizedBox(
+                          width: 8,
                         ),
-                      ),
-                      SizedBox(
-                        width: 8,
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            )
-          ],
+                      ],
+                    ),
+                  ],
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );
